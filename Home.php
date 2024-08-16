@@ -1,254 +1,265 @@
-<?php
-include_once('database/database.php');
-?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon.ico">
+
     <title>Freight Cost Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
 
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
-        label {
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
-        }
+    <!-- CSS Files -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/material-bootstrap-wizard.css" rel="stylesheet" />
 
-        input[type="number"], .insurance-options {
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .insurance-options {
-            display: flex;
-            align-items: center;
-        }
-
-        .insurance-options label {
-            margin-left: 10px;
-            margin-right: 20px;
-        }
-
-        button {
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #4cae4c;
-        }
-
-        .clear-button {
-            margin-top: 10px;
-            background-color: #d9534f;
-        }
-
-        .clear-button:hover {
-            background-color: #c9302c;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .location {
-            font-size: 0.9em;
-            color: #888;
-        }
-    </style>
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
 </head>
+
 <body>
-    <div class="container">
-        <h1>Freight Cost Calculator</h1>
-        <form id="shippingForm">
-            <label for="weight">Enter Parcel Weight (kg):</label>
-            <input type="number" id="weight" name="weight" step="0.1" required>
-            
-            <label for="length">Enter Length (cm):</label>
-            <input type="number" id="length" name="length" required>
-            
-            <label for="width">Enter Width (cm):</label>
-            <input type="number" id="width" name="width" required>
-            
-            <label for="height">Enter Height (cm):</label>
-            <input type="number" id="height" name="height" required>
-            
-            <label for="pickupPincode">Enter Pickup Pincode:</label>
-            <input type="number" id="pickupPincode" name="pickupPincode" required>
-            <p id="pickupLocation" class="location"></p>
-            
-            <label for="deliveryPincode">Enter Delivery Pincode:</label>
-            <input type="number" id="deliveryPincode" name="deliveryPincode" required>
-            <p id="deliveryLocation" class="location"></p>
-
-            <label for="shipmentValue">Enter Shipment Value (₹):</label>
-            <input type="number" id="shipmentValue" name="shipmentValue" required>
-
-            <label>Insurance Required (₹100 if value > ₹3000):</label>
-            <div class="insurance-options">
-                <input type="radio" id="insuranceYes" name="insurance" value="yes">
-                <label for="insuranceYes">Yes</label>
-                <input type="radio" id="insuranceNo" name="insurance" value="no" checked>
-                <label for="insuranceNo">No</label>
+    <div class="image-container set-full-height" style="background-image: url('assets/img/wizard-profile.jpg')">
+        <!--   Creative Tim Branding   -->
+        <a href="dashboard.php">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/fc_logo.png">
+                </div>
+                <div class="brand">
+                    Freight Calculator
+                </div>
             </div>
+        </a>
 
-            <p id="insuranceError" class="error"></p>
-            <p id="shipmentValueError" class="error"></p>
+        <!--   Big container   -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <!--      Wizard container        -->
+                    <div class="wizard-container">
+                        <div class="card wizard-card" data-color="green" id="wizardProfile">
+                            <form action="" method="">
+                                <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
-            <button type="submit">Calculate Cost</button>
-            <button type="button" class="clear-button" onclick="clearForm()">Clear</button>
-        </form>
-        <p id="result"></p>
-        <p id="error" class="error"></p>
+                                <div class="wizard-header">
+                                    <h3 class="wizard-title">
+                                        Freight Cost Calculator
+                                    </h3>
+                                    <h5>Note: Variable charges depend on factors such as cargo value, storage duration, part specifications, and destination country regulations.</h5>
+                                </div>
+                                <div class="wizard-navigation">
+									<ul>
+			                            <li><a href="#customer_info" data-toggle="tab">Customer Info</a></li>
+			                           
+			                            <li><a href="#charges" data-toggle="tab">Charges</a></li>
+			                        </ul>
+								</div>
+
+                                <div class="tab-content">
+                                <div class="tab-pane" id="customer_info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <!-- <i class="material-icons">face</i> -->
+                                                </span>
+                                                <div class="form-group label-floating">
+		                                        	<label class="control-label">Estimate From</label>
+		                                        	<select class="form-control">
+		                                            	<option disabled="" selected=""></option>
+		                                            	<option>Yes</option>
+		                                            	<option>No </option>
+		                                        	</select>
+		                                    	</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+		                                        	<label class="control-label">Ship From</label>
+		                                        	<select class="form-control">
+		                                            	<option disabled="" selected=""></option>
+		                                            	<option>Yes</option>
+		                                            	<option>No </option>
+		                                        	</select>
+		                                    	</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+		                                        	<label class="control-label">Ship To</label>
+		                                        	<select class="form-control">
+		                                            	<option disabled="" selected=""></option>
+		                                            	<option>Yes</option>
+		                                            	<option>No </option>
+		                                        	</select>
+		                                    	</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="charges">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <!-- <i class="material-icons">face</i> -->
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label"> Importer of Record (IOR) <small>(required)</small></label>
+                                                    <input name="firstname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Estimated Duty & Taxes<small>(required)</small></label>
+                                                    <input name="lastname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Freight<small>(required)</small></label>
+                                                    <input name="firstname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Customs Brokerage<small>(required)</small></label>
+                                                    <input name="lastname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Import Permit/Approval<small>(required)</small></label>
+                                                    <input name="firstname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Handling Charges<small>(required)</small></label>
+                                                    <input name="lastname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">CLast Mile Delivery <small>(required)</small></label>
+                                                    <input name="lastname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Admin & Bank Charges<small>(required)</small></label>
+                                                    <input name="firstname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Compliance & Certification<small>(required)</small></label>
+                                                    <input name="lastname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Storage<small>(required)</small></label>
+                                                    <input name="firstname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+
+                                           
+                                        </div>
+                                        <div class="col-sm-10 col-sm-offset-1">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <!-- <i class="material-icons">email</i> -->
+                                                </span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Total</label>
+                                                    <input name="email" type="email" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="wizard-footer">
+		                            <div class="pull-right">
+		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
+		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='get_estimate' value='Get Estimates' />
+		                            </div>
+
+		                            <div class="pull-left">
+		                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+		                            </div>
+		                            <div class="clearfix"></div>
+		                        </div>
+                            </form>
+                        </div>
+                    </div> <!-- wizard container -->
+                </div>
+            </div><!-- end row -->
+        </div> <!--  big container -->
+
+        <div class="footer">
+            <div class="container text-center">
+                Made with <i class="fa fa-heart heart"></i> by <a href="https://www.venturetronics.com/">Venturetronics</a>.
+            </div>
+        </div>
     </div>
-    <script>
-        document.getElementById('shippingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            calculateCost();
-        });
 
-        function calculateCost() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const length = parseFloat(document.getElementById('length').value);
-            const width = parseFloat(document.getElementById('width').value);
-            const height = parseFloat(document.getElementById('height').value);
-            const pickupPincode = document.getElementById('pickupPincode').value;
-            const deliveryPincode = document.getElementById('deliveryPincode').value;
-            const shipmentValue = parseFloat(document.getElementById('shipmentValue').value);
-            const insurance = document.querySelector('input[name="insurance"]:checked').value === 'yes';
-            const errorElement = document.getElementById('error');
-            const resultElement = document.getElementById('result');
-            const insuranceErrorElement = document.getElementById('insuranceError');
-            const shipmentValueErrorElement = document.getElementById('shipmentValueError');
-            errorElement.textContent = '';
-            resultElement.textContent = '';
-
-            // Validate Shipment Value
-            if (shipmentValue > 10000) {
-                shipmentValueErrorElement.textContent = 'Error: Shipment value cannot exceed ₹10,000.';
-                return;
-            } else {
-                shipmentValueErrorElement.textContent = '';
-            }
-
-            // Validate Insurance
-            if (shipmentValue > 3000 && !insurance) {
-                insuranceErrorElement.textContent = 'Insurance is mandatory for shipments over ₹3000.';
-                return;
-            } else {
-                insuranceErrorElement.textContent = '';
-            }
-
-            if (weight > 10) {
-                errorElement.textContent = 'Error: Weight above 10 kg cannot be shipped.';
-                return;
-            }
-
-            validatePincode(pickupPincode, 'pickupLocation', function(isValidPickup) {
-                if (!isValidPickup) {
-                    errorElement.textContent = 'Invalid Pickup Pincode';
-                    return;
-                }
-
-                validatePincode(deliveryPincode, 'deliveryLocation', function(isValidDelivery) {
-                    if (!isValidDelivery) {
-                        errorElement.textContent = 'Invalid Delivery Pincode';
-                        return;
-                    }
-
-                    let actualWeight = weight;
-                    let volumetricWeight = (length * width * height) / 5000;
-                    let finalWeight = Math.max(actualWeight, volumetricWeight);
-
-                    let cost = 0;
-
-                    if (finalWeight <= 0.5) {
-                        cost = 75;
-                    } else if (finalWeight <= 4) {
-                        cost = 75 + Math.ceil((finalWeight - 0.5) / 0.5) * 72;
-                    } else if (finalWeight <= 5) {
-                        cost = 626;
-                    } else if (finalWeight <= 9) {
-                        cost = 626 + Math.ceil((finalWeight - 5) / 1) * 49;
-                    } else if (finalWeight <= 10) {
-                        cost = 873;
-                    }
-
-                    if (insurance) {
-                        cost += 100;
-                    }
-
-                    resultElement.textContent = `The estimated shipping cost is ₹${cost}.`;
-                });
-            });
-        }
-
-        function validatePincode(pincode, locationElementId, callback) {
-            if (pincode.length === 6) {
-                fetch(`https://api.postalpincode.in/pincode/${pincode}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data[0].Status === "Success") {
-                            const location = data[0].PostOffice[0].District + ", " + data[0].PostOffice[0].State;
-                            document.getElementById(locationElementId).textContent = `Location: ${location}`;
-                            callback(true);
-                        } else {
-                            document.getElementById(locationElementId).textContent = 'Invalid Pincode';
-                            callback(false);
-                        }
-                    });
-            } else {
-                document.getElementById(locationElementId).textContent = '';
-                callback(false);
-            }
-        }
-
-        function clearForm() {
-            document.getElementById('shippingForm').reset();
-            document.getElementById('pickupLocation').textContent = '';
-            document.getElementById('deliveryLocation').textContent = '';
-            document.getElementById('result').textContent = '';
-            document.getElementById('error').textContent = '';
-            document.getElementById('insuranceError').textContent = '';
-            document.getElementById('shipmentValueError').textContent = '';
-        }
-    </script>
 </body>
+<!--   Core JS Files   -->
+<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.bootstrap.js" type="text/javascript"></script>
+
+<!--  Plugin for the Wizard -->
+<script src="assets/js/material-bootstrap-wizard.js"></script>
+
+<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+<script src="assets/js/jquery.validate.min.js"></script>
+
 </html>

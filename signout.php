@@ -3,7 +3,7 @@
 	require_once("includes/helpers.php");
 	require_once('packages/Mysqldump/Mysqldump.php');
     // Connect Database
-    $dump = new Ifsnop\Mysqldump\Mysqldump('mysql:host=localhost;dbname=mra', 'root', 'ims-admin$');
+    $dump = new Ifsnop\Mysqldump\Mysqldump('mysql:host=localhost;dbname=freight_calculator_db', 'root', 'ims-admin$');
 	
 	$time=date('Ymd Hi', strtotime('+4 Hours'));
 
