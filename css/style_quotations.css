@@ -1,0 +1,201 @@
+@media screen and (max-width: 3400px) {
+
+
+	#open_quote_file {
+		color: #2E86C1;
+	}
+	#open_quote_file:hover {
+		cursor: pointer;
+	}
+	.comparison_table thead th {
+		background: #154360;
+		color: #FDFEFE;	
+		border-top:2px solid transparent;
+		padding: 8px 0px 8px 8px; 
+		border-right:1px solid #FDFEFE;
+		font-size: 15px;
+		border-bottom: 1px solid transparent;
+	}
+
+	.comparison_table thead th:first-child {
+		border-top-left-radius: .8em;
+	}
+	.comparison_table thead th:last-child {
+		border-right:1px solid transparent;
+		border-top-right-radius: .8em;
+	}
+	.comparison_table tbody tr {
+		height: 35px;
+	}
+	.comparison_table tbody td {
+		border-right: 1px solid #D0D3D4;
+		border-bottom: 1px solid transparent;
+	}
+	.comparison_table tbody:last-child {
+		border-bottom:1px solid #D0D3D4;
+	}
+	.comparison_table tbody td:last-child {
+		border-right:1px solid transparent;
+	}
+
+	#vendor_lists {
+		width: 550px;
+		height: 32px;
+		font-size: 16px;
+		font-weight: 600; 
+		padding: 0px 1px 0px 1px; 
+		text-align: center; 
+	}
+	#vendor_lists:last-child {
+		border-right: 3px solid transparent; 
+	}
+
+	.vendor_list_tables thead th {
+		background: #B3B6B7;
+		color: #1C2833;	
+		border-top:2px solid transparent;
+		padding: 8px 0px 8px 8px; 
+		border-right:1px solid #FDFEFE;
+		font-size: 15px;
+	}
+	.vendor_list_tables thead th:first-child {
+		border-top-left-radius: .8em;
+	}
+	.vendor_list_tables thead th:last-child {
+		border-top-right-radius: .8em;
+		border-right:1px solid transparent;
+	}
+	.vendor_list_tables tbody tr {
+		height: 35px;
+	}
+	.vendor_list_tables tbody:last-child {
+		border-bottom:1px solid #D0D3D4;
+	}
+	.vendor_list_tables tbody td {
+		border-right:1px solid #D0D3D4;
+		border-bottom: 1px solid transparent;
+	}
+	.vendor_list_tables tbody td:last-child {
+		border-right:1px solid transparent;
+	}
+
+	
+	
+	/*#quotation_form_layout {
+		margin-top: 0px;
+	}
+	#quotation_form_layout label {
+		background: #1A5276; 
+		color:white; 
+		padding: 2px; 
+		font-size: 13px; 
+		font-weight: bold;
+		margin-right: 10px; 
+		width: 100%; 
+		text-align: center;
+	}
+	#quotation_form_layout div {
+		font-size: 16px;
+		text-align: center;
+		margin-top: -10px;
+	}
+	#quotation_form_layout #quotation_lable {
+		margin-top: 10px;
+	}
+	.layout_heading span {
+		font-size: 14px;
+		font-weight: bold;
+	}
+
+	#quotation_no_heading {
+		margin-top: -5px;
+		padding: 0px 4px;
+	}
+	#quotation_no_heading h6 {
+		font-size: 20px;
+		color: #1A5276;
+		font-weight: 500;
+	}
+	#quotation_no_heading span {
+		font-size: 14px;
+		font-weight: bold;
+	}
+
+	#quotation_table .table_style td:first-child {
+	    border: transparent;
+	}
+	#quotation_table .table_style tr:last-child td+td {
+	  border: transparent;
+	}
+	#quotation_table .table_style tr:last-child td {
+	    background: #AEB6BF;
+	}
+	#qoutation_total_area input {
+		margin-top: -6px;
+	}
+	#qoutation_total_area #qoutation_total_area_responsive {
+		background: transparent; 
+		height: 8px;
+	}
+
+	#zoom_in {
+		width: 150px;
+		margin-bottom: 5px;
+		border:2px solid #F4F6F7;
+	}
+	#zoom_in:hover {
+		cursor: pointer;
+	}
+	#show_image_outer_container, #zoomin_editquoteimage {
+		width: 100%;
+		min-width: 380px;
+		height: 100%;
+		position: absolute; 
+		top: 0px; 
+		left: 0px; 
+		z-index: 999; 
+		background-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.8) 100%);
+	}
+	#show_image_inner_container, #zoomin_editquoteimage_inner {
+		width: 500px;
+	}
+	#quote_image_container, #editquoteimage {
+		width: 100%; 
+		height: auto; 
+		margin-top:4px; 
+		border:2px solid #1B2631; 
+		border-radius: 2px;
+	}
+	#hide_image_icon, #close_image {
+		width: 30px; 
+		background: white;
+	}
+	#hide_image_icon:hover, #close_image:hover {
+		cursor: pointer;
+	}*/
+}
+/*@media screen and (max-width: 768px) {
+	#quotation_form_layout #quotation_lable {
+		margin-top: 15px;
+	}
+	#show_image_inner_container {
+		width: 480px;
+	}
+	#qoutation_total_area label {
+		margin-top: 10px;
+	}
+	#qoutation_total_area #qoutation_total_area_responsive {
+		background: transparent; 
+		height: 0px;
+	}
+}
+@media screen and (max-width: 500px) {
+	#quotation_layout #page_heading {
+		font-size: 20px;
+	}
+	#show_image_inner_container {
+		width: 90%;
+	}
+}*/
+
+

@@ -1,0 +1,271 @@
+@media screen and (max-width: 3400px) {
+
+	#dashboard_layout {
+		/*border: 1px solid green;*/
+		padding: 0px 30px;
+	}
+	#dashboard_left_area{
+		padding: 0px;
+		width: 25%;
+		float: right;
+	}
+	#delayedjob_div{
+		width: 100%; 
+		background: #286175; 
+		color: white;
+		text-align: center;
+		font-size: 22px; 
+		padding: 5px; 
+		border-radius: 3px 3px 0px 0px;
+	}
+	#delayed_jobs_heading{
+		padding: 6px; 
+		color: white;
+		background:#C0392B;  
+		font-weight: 500; 
+		font-size: 18px;
+	}
+	#delayed_jobs_value{
+		border: 1px solid #286175; 
+		text-align: center; 
+		padding-top: 2px;
+		color: #286175; 
+		border-radius: 0px 0px 3px 3px;
+		font-size: 30px;
+		font-weight: 600;
+	}
+	#filters_area{
+		/*color: white; 
+		background: #154360; 
+		padding: 10px 0px 18px 0px; 
+		margin-top: 10px;*/
+	}
+	#graph_area{
+		overflow-x: auto; 
+		overflow-y: hidden; 
+		background: #fbfdfe; 
+		border: 1px solid #D6EAF8; 
+		box-shadow: 0px 0px 2px 0px #D6EAF8; 
+		margin-top: 0px;
+	}
+	#graph_container{
+		width: 100%
+	}
+	#timeline_heading_area {
+		border: 0px solid #F4F6F7; 
+		margin-top: 0px; 
+		padding:0px;
+		font-size: 22px; 
+		font-weight: 550;
+		width: 50%;
+	}
+	#timeline_team_name_area {
+		margin-bottom: 10px;
+		padding: 0px; 
+		padding-top: 4px; 
+		padding-right: 20px; 
+		font-size: 13px; 
+		font-weight: 550;
+		width: 25%;
+	}
+	#timeline_team_name_area #text {
+		float: left;
+		width: 85px;
+		padding-top: 5px;
+	}
+	#timeline_team_name_area #team_list {
+		margin-left: 85px;
+	}
+	#timeline_filter_area {
+		padding:0px; 
+		padding-top: 4px; 
+		font-size: 13px; 
+		font-weight: 550;
+		width: 25%;
+	}
+	#timeline_filter_area  #text {
+		float: left;
+		width: 60px;
+		padding-top: 5px;
+	}
+	#timeline_filter_area  img {
+		width: 15px;
+		margin-top: -4px;
+	} 
+	#timeline_filter_area  #date_filter {
+		margin-left: 60px;
+	}
+	#timeline_outer_area {
+		padding: 0px; 
+		padding-right: 20px;
+		width: 75%;
+		float: left;
+	}
+	#timeline_area{
+		padding-top: 6px;
+		padding: 3px; 
+		/*background: #FBFCFC;*/
+		background: #F7F9F9;
+		padding-top: 8px;
+	}
+
+	.timeline_area{
+		font-size: 22px; 
+		font-weight: 550;
+	}
+	#timeline_container_outer{
+		overflow-x: auto;
+	}
+	#timeline_tags{
+		padding-left: 22px;
+	}
+	#lead_time_area{
+		width: 120px;
+	}
+	#lead_time_identifier{
+		width:16px; 
+		height: 16px; 
+		background: #229954; 
+		float: left; 
+		margin-right: 10px;
+	}
+	#lead_time_identifier_text{
+		margin-top: -1px; 
+		font-size: 13px; 
+		font-weight: 600;
+	}
+	#slip_for_commitment_area{
+		width: 200px;
+	}
+	#slip_for_commitment_identifier{
+		width:16px; 
+		height: 16px; 
+		float: left; 
+		margin-right: 10px; 
+		background: red;
+		/*background-image: radial-gradient(#A93226 1px, #F2D7D5 1px); */
+		background-size: 3px 3px;
+	}
+	#slip_for_commitment_identifier_text{
+		margin-top: -1px; 
+		font-size: 13px; 
+		font-weight: 600;
+	}
+	#timeline_container{
+		/*border:1px solid red; */
+		margin-top: 10px; 
+		padding: 8px 8px 0px 8px; 
+		max-height: 800px; 
+		overflow-y: auto; 
+		min-width: 900px; 
+		position: relative; 
+		z-index: 1;
+		background: #fbfdfe;
+	}
+	.tooltip-inner {
+	    background: #154360;
+	    border-radius: .3rem;
+	    max-width: 220px
+	    color:white;
+	}
+	.tooltip .arrow::before {
+	    border-top-color:#154360;
+	    border-bottom-color:#154360;
+	}
+	#delayedjob_area {
+		padding: 0px;
+	}
+	#graph_area {
+		margin-top: 10px;
+		border: 1px solid #F7F9F9;
+	}
+	#graph_container {
+		min-width: 350px;
+	}
+}
+@media screen and (max-width: 1450px) {
+	#timeline_heading_area {
+		width: 40%;
+	}
+	#timeline_team_name_area {
+		width: 35%;
+	}
+	#timeline_filter_area {
+		width: 25%;
+	}
+}
+@media screen and (max-width: 1200px) {
+	#timeline_heading_area {
+		width: 50%;
+	}
+	#timeline_team_name_area {
+		width: 50%;
+		padding: 0px;
+	}
+	#timeline_filter_area {
+		width: 100%;
+		float: right;
+		padding-left: 50%;
+	}
+	#timeline_filter_area  #text {
+		width: 85px;
+	}
+	#timeline_filter_area  #date_filter {
+		margin-left: 85px;
+	}
+	#timeline_outer_area {
+		padding: 0px; 
+		margin-top: 15px;
+	}
+	#graph_area{
+		margin-top: 15px;
+	}
+	#delayedjob_area{
+		margin-top: 15px;
+	}
+}
+@media screen and (max-width: 992px) {
+	#dashboard_layout {
+		padding: 0px 15px;
+	}
+}
+@media screen and (max-width: 768px) {
+	#dashboard_layout {
+		padding: 0px 10px;
+	}
+	#timeline_heading_area {
+		width: 100%;
+		padding: 0px;
+	}
+	#timeline_team_name_area {
+		width: 100%;
+		padding: 0px;
+		margin-top: 4px;
+	}
+	#timeline_filter_area {
+		width: 100%;
+		padding-left: 0%;
+	}
+	#timeline_filter_area  #text {
+		width: 85px;
+	}
+	#timeline_filter_area  #date_filter {
+		margin-left: 85px;
+	}
+	#timeline_outer_area {
+		padding: 0px; 
+		margin-top: 15px;
+		width: 100%;
+	}
+	#dashboard_left_area{
+		width: 100%;
+	}
+	#graph_area {
+		padding: 0px;
+	}
+}
+@media screen and (max-width: 500px) {
+	#dashboard_layout {
+		padding: 0px;
+	}
+}
