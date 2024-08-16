@@ -83,9 +83,9 @@ $(document).ready(function() {
 		document.getElementById("manage_items").className = "link_active";
 		document.getElementById("new_item").className = "link_active";
 	}
-	if (path == DomainName+"/brands" || path == DomainName+"/newbrand" || path == DomainName+"/editbrand.php") {
+	if (path == DomainName+"/settings" ) {
 		document.getElementById("manage_items").className = "link_active";
-		document.getElementById("brands").className = "link_active";
+		document.getElementById("settings").className = "link_active";
 	}
 	if (path == DomainName+"/models" || path == DomainName+"/newmodel" || path == DomainName+"/editmodel.php") {
 		document.getElementById("manage_items").className = "link_active";

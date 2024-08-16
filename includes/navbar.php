@@ -11,7 +11,7 @@
 	     	<div id="navbar_top_layout">
      			<div id="navbar_top_layout_left">
      				<div id="vt_logo">
-     					<img id="logo" src="images/mra_logo-removebg-preview.png" width="62px">
+     					<img id="logo" src="images/fc_logo.png" width="62px">
 						<br>
      					<!-- <span id="logo_heading">VENTURETRONICS</span> -->
      					<!-- <img id="logo_heading" src="images/vt-heading.png" width="190px;"> -->
@@ -69,51 +69,45 @@
 					<span id="navbar_text">Dashboard</span>
 				</a>
 
-				<a href="quotations" id="quotations" title="Quotations" class="anchor_tag">
-					<img id="bydefault_svg" src="images/sidebar_icons/quotation_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/quotation_hover.svg">
-					<span id="navbar_text">Quotations</span>
-				</a>
-
 				<a href="purchases" id="purchases" title="Purchases" class="anchor_tag">
 					<img id="bydefault_svg" src="images/sidebar_icons/quotation_default.svg">
 					<img id="hover_svg" src="images/sidebar_icons/quotation_hover.svg">
-					<span id="navbar_text">Purchases</span>
+					<span id="navbar_text">Country Rates </span>
 				</a>
 
 				<a href="invoices" id="invoices" title="Invoices" class="anchor_tag">
 					<img id="bydefault_svg" src="images/sidebar_icons/quotation_default.svg">
 					<img id="hover_svg" src="images/sidebar_icons/quotation_hover.svg">
-					<span id="navbar_text">Invoices</span>
+					<span id="navbar_text">Origins</span>
 				</a>
 
 				<a href="vendors" id="vendors" title="Vendors" class="anchor_tag">
 					<img id="bydefault_svg" src="images/sidebar_icons/vendor_default.svg">
 					<img id="hover_svg" src="images/sidebar_icons/vendor_hover.svg">
-					<span id="navbar_text">Vendors</span>
+					<span id="navbar_text">Countries</span>
 				</a>
 
 				<a href="clients" id="clients" title="Clients" class="anchor_tag">
 					<img id="bydefault_svg" src="images/sidebar_icons/vendor_default.svg">
 					<img id="hover_svg" src="images/sidebar_icons/vendor_hover.svg">
-					<span id="navbar_text">Clients</span>
+					<span id="navbar_text">Customers</span>
 				</a>
 
 				<a href="#"  data-toggle="collapse" data-target="#service" class="collapsed manage_items" id="manage_items" title="Manage Items">
 					<img id="bydefault_svg" src="images/sidebar_icons/manage_product_default.svg">
 					<img id="hover_svg" src="images/sidebar_icons/manage_product_hover.svg">
-					<span id="navbar_text">Manage Items</span>
+					<span id="navbar_text">Settings</span>
 				</a>
             	<div class="collapse" id="service">
 					<a href="items" id="new_item" title="Items">&nbsp;&nbsp;
 						<img id="bydefault_svg" src="images/sidebar_icons/product_default.svg">
 							<img id="hover_svg" src="images/sidebar_icons/product_hover.svg">
-						<span id="inner_navbar_text">Items</span>
+						<span id="inner_navbar_text">Country rates</span>
 					</a>
-					<a href="brands" id="brands" title="Brands">&nbsp;&nbsp;
+					<a href="settings" id="settings" title="Settings">&nbsp;&nbsp;
 						<img id="bydefault_svg" src="images/sidebar_icons/product_default.svg">
 							<img id="hover_svg" src="images/sidebar_icons/product_hover.svg">
-						<span id="inner_navbar_text">Brands</span>
+						<span id="inner_navbar_text">other</span>
 					</a>
 					<a href="models" id="models" title="Models">&nbsp;&nbsp;
 						<img id="bydefault_svg" src="images/sidebar_icons/product_default.svg">

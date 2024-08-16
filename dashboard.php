@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<?php include_once('includes/header.php'); ?>
-		<title>MRA - Dashboard</title>
+		<title>FC - Dashboard</title>
 		<link rel="stylesheet" type="text/css" href="css/style_dashboard.css">
 		
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -168,141 +168,8 @@
 			include_once('includes/navbar.php');
 		?>
 		<div id="outer_layout">
-			<div id="inner_layout">
-				<div id="dashboard_layout">
-					
-					<div id="page_heading" class="row">
-						Dashboard
-					</div>
-					<div id="margin_div"></div>
-					<!-- <div id="margin_div"></div> -->
-					<!-- <div id="margin_div"></div> -->
-
-					<div class="filters">
-						<div class="row">
-							<div class="col-md-3 mt-1 no_of_days_container">
-								<strong> No of Days: </strong>
-								<input type="hidden" name="selected_days" id="selected_days" class="selected_days" value="0">
-								<select class="form-control form-control-sm no_of_days selectpicker" onchange="getDashboardData();">
-									<option value="0" selected>All</option>
-									<option value="15">Last 15 Days</option>
-									<option value="30">Last 30 Days</option>
-									<option value="60">Last 60 Days</option>
-									<option value="90">Last 90 Days</option>
-									<option value="custom">Custom</option>
-								</select>
-							</div>
-							<div class="col-md-3 mt-1 daterange_container">
-								<div class="d-flex justify-content-between">
-									<div> <strong> Date: </strong> </div>
-									<div id="close_custom_date"> X </div>
-								</div>
-								<input type="text" id="daterange" name="daterange" onchange="getDashboardData();" class="form-control form-control-sm daterange" />
-							</div>
-							<div class="col-md-3 mt-1">
-								<span class="font-weight-light">
-									<strong> Vendors: </strong>
-								</span>
-								<select class="form-control form-control-sm vendor_id selectpicker" id="vendor_id" name="vendor_id[]" multiple data-selected-text-format="count > 2" onchange="getDashboardData();" data-actions-box="true">
-									<?php
-										$query = "Select * FROM vendors ORDER By vendor_name ASC";
-										$result = mysqli_query($connection, $query);
-										if(mysqli_num_rows($result)) {
-											while($row = mysqli_fetch_assoc($result)){
-												$vendor_id = $row['vendor_id'];
-												$vendor_name = ucfirst($row['vendor_name']);
-
-												$selected = '';
-												if ($dbvendor_id == $vendor_id) {
-													$selected = 'selected';
-												}
-												echo '<option value="'.$vendor_id.'" '.$selected.'>'.$vendor_name.'</option>';
-											}
-										}
-									?>
-								</select>
-							</div>
-							<div class="col-md-3 mt-1">
-								<span class="font-weight-light">
-									<strong> Clients:<i class="text-danger">*</i> </strong>
-								</span>
-								<select class="form-control form-control-sm client_id selectpicker" id="client_id" name="client_id[]" multiple data-selected-text-format="count > 2" onchange="getDashboardData();" data-actions-box="true">
-									<?php
-										$query = "Select * FROM clients ORDER By client_name ASC";
-										$result = mysqli_query($connection, $query);
-										if(mysqli_num_rows($result)) {
-											while($row = mysqli_fetch_assoc($result)){
-												$client_id = $row['client_id'];
-												$client_name = ucfirst($row['client_name']);
-
-												$selected = '';
-												if ($dbclient_id == $client_id) {
-													$selected = 'selected';
-												}
-												echo '<option value="'.$client_id.'" '.$selected.'>'.$client_name.'</option>';
-											}
-										}
-									?>
-								</select>
-
-								</select>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="row top_container">
-						<div class="col-md-3" style="border: 1px solid transparent; padding-right: 13px;" onclick="window.location='OpenPurchases';">
-							<div class="text-center data mt-4"> 
-								<div class="heading"> To Pay </div>
-								<div class="number mt-3 to_pay"> <span class="label">PKR</span>&nbsp;&nbsp; <span class="amount">0.00</span> </div>
-							</div>
-						</div>
-						<div class="col-md-3" style="border: 1px solid transparent; padding-left: 13px;" onclick="window.location='OpenInvoices';">
-							<div class="text-center data mt-4"> 
-								<div class="heading"> Paid </div>
-								<div class="number mt-3 paid"> <span class="label">PKR</span>&nbsp;&nbsp; <span class="amount">0.00</span> </div>
-							</div>
-						</div>
-						<div class="col-md-3" style="border: 1px solid transparent; padding-left: 13px;" onclick="window.location='OpenInvoices';">
-							<div class="text-center data mt-4"> 
-								<div class="heading"> To Receive </div>
-								<div class="number mt-3 to_receive"> <span class="label">PKR</span>&nbsp;&nbsp; <span class="amount">0.00</span> </div>
-							</div>
-						</div>
-						<div class="col-md-3" style="border: 1px solid transparent; padding-left: 13px;" onclick="window.location='OpenInvoices';">
-							<div class="text-center data mt-4"> 
-								<div class="heading"> Received </div>
-								<div class="number mt-3 received"> <span class="label">PKR</span>&nbsp;&nbsp; <span class="amount">0.00</span> </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row bottom_container">
-						<div class="col-lg-6 vendors_breakdown" style="border: 1px solid transparent; padding-right: 13px;">
-							<div class="text-center data mt-4">
-								<div class="heading"> Vendor's Breakdown </div>
-								<div class="number mt-3"> <canvas id="VendorChart"></canvas> </div>
-								<div class="custom_arrows">
-									<span> <i class="fa fa-chevron-left left_icon"></i> </span>
-									<span> <i class="fa fa-chevron-right right_icon"></i> </span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 clients_breakdown" style="border: 1px solid transparent; padding-left: 13px;">
-							<div class="text-center data mt-4">
-								<div class="heading"> Client's Breakdown </div>
-								<div class="number mt-3"> <canvas id="ClientChart"></canvas> </div>
-								<div class="custom_arrows">
-									<span> <i class="fa fa-chevron-left left_icon"></i> </span>
-									<span> <i class="fa fa-chevron-right right_icon"></i> </span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
+		<div id="inner_layout">
+		</div>
 		</div>
 		<div id="bottom_layout"></div>
 	</body>

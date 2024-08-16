@@ -9,7 +9,7 @@ if (isset($_SESSION['user_email']) == true) {
 
 	<head>
 		<?php include_once('includes/header.php'); ?>
-		<title>IMS - Login</title>
+		<title>FC - Login</title>
 	</head>
 
 	<body id="body">
