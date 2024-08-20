@@ -1,0 +1,55 @@
+.date {
+    background-color:#FFFFFF !important;
+}
+.datepicker {
+    border:1px solid #D0D3D4;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 24px;
+    padding:6px;
+    color: #154360;
+    border-radius:0px;
+    margin-top:4px;
+} 
+.datepicker td {
+    width: 40px;
+    height: 40px;
+}
+.datepicker table th {
+    background-color: #FFFFFF;
+}
+    .datepicker table tr td:hover {
+    border-radius:30px;
+}
+.datepicker table tr td.active.active {
+    background:#154360;
+    border-radius:30px;
+}
+.datepicker table tr td.active.active:hover {
+    background:#D0D3D4;
+    border-radius:30px;
+}
+.datepicker .datepicker-switch {
+    padding: 5px 0px 5px 0px;
+    background: none;
+}
+.datepicker .datepicker-switch .prev {
+    background: red !important;
+}
+.datepicker .datepicker-switch:hover {
+    border-radius: 50px;
+}
+
+
+.for-icon {
+    position: relative;
+}
+.for-icon span {
+    position: absolute;
+    top:24px;
+    right:8px;
+    pointer-events:none;
+}
+
+textarea {
+    resize:none;
+    height: 75px;
+}

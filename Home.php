@@ -27,12 +27,22 @@
 </head>
 
 <body>
-    <div class="image-container set-full-height" style="background-image: url('assets/img/wizard-profile.jpg')">
+    <div class="image-container set-full-height" style="background-image: url('assets/img/warehousing.jpeg')">
         <!--   Creative Tim Branding   -->
-        <a href="dashboard.php">
+        <?php
+
+
+        if (isset($_SESSION['user_email']) == true) {
+            $link = 'Home';
+        } else {
+            $link = 'dashboard';
+        }
+
+        ?>
+        <a href="<?php echo $link; ?>">
             <div class="logo-container">
                 <div class="logo">
-                    <img src="images/fc_logo.png">
+                    <img src="images/fc_logo_bg.png">
                 </div>
                 <div class="brand">
                     Freight Calculator
@@ -57,185 +67,185 @@
                                     <h5>Note: Variable charges depend on factors such as cargo value, storage duration, part specifications, and destination country regulations.</h5>
                                 </div>
                                 <div class="wizard-navigation">
-									<ul>
-			                            <li><a href="#customer_info" data-toggle="tab">Customer Info</a></li>
-			                           
-			                            <li><a href="#charges" data-toggle="tab">Charges</a></li>
-			                        </ul>
-								</div>
+                                    <ul>
+                                        <li><a href="#customer_info" data-toggle="tab">Customer Info</a></li>
+
+                                        <li><a href="#charges" data-toggle="tab">Charges</a></li>
+                                    </ul>
+                                </div>
 
                                 <div class="tab-content">
-                                <div class="tab-pane" id="customer_info">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <!-- <i class="material-icons">face</i> -->
-                                                </span>
-                                                <div class="form-group label-floating">
-		                                        	<label class="control-label">Estimate From</label>
-		                                        	<select class="form-control">
-		                                            	<option disabled="" selected=""></option>
-		                                            	<option>Yes</option>
-		                                            	<option>No </option>
-		                                        	</select>
-		                                    	</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-		                                        	<label class="control-label">Ship From</label>
-		                                        	<select class="form-control">
-		                                            	<option disabled="" selected=""></option>
-		                                            	<option>Yes</option>
-		                                            	<option>No </option>
-		                                        	</select>
-		                                    	</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-		                                        	<label class="control-label">Ship To</label>
-		                                        	<select class="form-control">
-		                                            	<option disabled="" selected=""></option>
-		                                            	<option>Yes</option>
-		                                            	<option>No </option>
-		                                        	</select>
-		                                    	</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="charges">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <!-- <i class="material-icons">face</i> -->
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label"> Importer of Record (IOR) <small>(required)</small></label>
-                                                    <input name="firstname" type="text" class="form-control">
+                                    <div class="tab-pane" id="customer_info">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <!-- <i class="material-icons">face</i> -->
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Estimate From</label>
+                                                        <select class="form-control">
+                                                            <option disabled="" selected=""></option>
+                                                            <option>Yes</option>
+                                                            <option>No </option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Estimated Duty & Taxes<small>(required)</small></label>
-                                                    <input name="lastname" type="text" class="form-control">
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Ship From</label>
+                                                        <select class="form-control">
+                                                            <option disabled="" selected=""></option>
+                                                            <option>Yes</option>
+                                                            <option>No </option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Freight<small>(required)</small></label>
-                                                    <input name="firstname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Customs Brokerage<small>(required)</small></label>
-                                                    <input name="lastname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Import Permit/Approval<small>(required)</small></label>
-                                                    <input name="firstname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Handling Charges<small>(required)</small></label>
-                                                    <input name="lastname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">CLast Mile Delivery <small>(required)</small></label>
-                                                    <input name="lastname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Admin & Bank Charges<small>(required)</small></label>
-                                                    <input name="firstname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Compliance & Certification<small>(required)</small></label>
-                                                    <input name="lastname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Storage<small>(required)</small></label>
-                                                    <input name="firstname" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                           
-                                        </div>
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <!-- <i class="material-icons">email</i> -->
-                                                </span>
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Total</label>
-                                                    <input name="email" type="email" class="form-control">
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Ship To</label>
+                                                        <select class="form-control">
+                                                            <option disabled="" selected=""></option>
+                                                            <option>Yes</option>
+                                                            <option>No </option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="tab-pane" id="charges">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <!-- <i class="material-icons">face</i> -->
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label"> Importer of Record (IOR) <small>(required)</small></label>
+                                                        <input name="firstname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Estimated Duty & Taxes<small>(required)</small></label>
+                                                        <input name="lastname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Freight<small>(required)</small></label>
+                                                        <input name="firstname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Customs Brokerage<small>(required)</small></label>
+                                                        <input name="lastname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Import Permit/Approval<small>(required)</small></label>
+                                                        <input name="firstname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Handling Charges<small>(required)</small></label>
+                                                        <input name="lastname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">CLast Mile Delivery <small>(required)</small></label>
+                                                        <input name="lastname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Admin & Bank Charges<small>(required)</small></label>
+                                                        <input name="firstname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Compliance & Certification<small>(required)</small></label>
+                                                        <input name="lastname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Storage<small>(required)</small></label>
+                                                        <input name="firstname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <!-- <i class="material-icons">email</i> -->
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Total</label>
+                                                        <input name="email" type="email" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="wizard-footer">
-		                            <div class="pull-right">
-		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='get_estimate' value='Get Estimates' />
-		                            </div>
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
+                                        <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='get_estimate' value='Get Estimates' />
+                                    </div>
 
-		                            <div class="pull-left">
-		                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
-		                            </div>
-		                            <div class="clearfix"></div>
-		                        </div>
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
                             </form>
                         </div>
                     </div> <!-- wizard container -->
@@ -243,11 +253,11 @@
             </div><!-- end row -->
         </div> <!--  big container -->
 
-        <div class="footer">
+        <!-- <div class="footer">
             <div class="container text-center">
                 Made with <i class="fa fa-heart heart"></i> by <a href="https://www.venturetronics.com/">Venturetronics</a>.
             </div>
-        </div>
+        </div> -->
     </div>
 
 </body>

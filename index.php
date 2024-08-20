@@ -2,7 +2,7 @@
 <?php
 	session_start();
 	if($_SESSION['user_email'] == true) {
-		header('location: dashboard');
+		header('location: home');
 	}
 	else {
 		header('location: home');

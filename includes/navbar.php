@@ -1,176 +1,165 @@
 <?php
-	include_once("session.php");
-	if($_SESSION['user_email'] == true) {
-
-		$user_name = $_SESSION['user_name'];
-		$user_role = $_SESSION['user_role'];
-		$super_admin = $_SESSION['super_admin'];
+include_once('header.php');
+$user_role = $_SESSION['user_role'];
+$username = $_SESSION['user_name'];
 ?>
-		<input type="hidden" name="module" class="module" value="0" />
-		<nav id="navbar" class="navbar navbar-expand-lg position-fixed w-100">
-	     	<div id="navbar_top_layout">
-     			<div id="navbar_top_layout_left">
-     				<div id="vt_logo">
-     					<img id="logo" src="images/fc_logo.png" width="62px">
-						<br>
-     					<!-- <span id="logo_heading">VENTURETRONICS</span> -->
-     					<!-- <img id="logo_heading" src="images/vt-heading.png" width="190px;"> -->
-     				</div>
-     				<div>
-	     				<span onclick="openNav()" id="open_icon"><i class="fa fa-bars"></i><i class="fa fa-caret-right" id="arrow"></i> </span>
-	     				<span onclick="closeNav()" id="close_icon"> <i class="fa fa-bars"></i><i class="fa fa-caret-left" id="arrow"></i> </span>
-     				</div>
-     			</div>
-     			<div id="heading">ACCOUNT MANAGEMENT</div>
-     			<div id="navbar_top_layout_right" class="pull-right text-right">
-     				<?php
-     					$user_name = '';
-     					$login_user_name = '';
-     					$user_name = explode(' ', $_SESSION['user_fullname']);
- 						if(strtolower($user_name[0]) == "muhammad" || strtolower($user_name[0]) == "mohammad") {
- 							$login_user_name = "<span style='font-weight:700;'>".$user_name[1]."<span>";
-     					} else{
-     						$login_user_name = "<span style='font-weight:700;'>".$user_name[0]."<span>";
-     					}
-     				?>
-     				<div id="signout_layout" style="">
-     					<div id="navbar_top_layout_right_display_name" class="pull-left"><?php echo ucwords( "Welcome ". $login_user_name); ?></div>
-					    <div class="dropdown">
-					        <div id="signout_image_layout" class="pull-right" data-toggle="dropdown" style="float: left;">
-					        	<img src="images/user-icon-4.png">
-					        </div>
-					        <!-- <div id="signout" class="signout" title="Sign out">
-					        	<img src="images/logout.svg" width="18px">&nbsp;
-					        	<span style="font-size: 16.4px; font-weight: 500;">Sign out</span>
-					        </div> -->
+<div>
 
-					        <div id="signout" class="signout" title="Sign out">
-					        	<img src="images/logout.svg" width="18px">&nbsp;
-					        	<span style="font-size: 16.4px; font-weight: 500;">Sign out</span>
-					        </div>
+    <!-- svg icons for success or failure message -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
+    <!-- svg icons for success or failure message -->
 
-					        <div id="signout_dropdown" class="dropdown-menu pull-right">
-					            <!-- <a href="#" class="dropdown-item"><i class="fa fa-user" title="Profile"></i>&nbsp; Profile</a> -->
-					            <!-- <a href="#" class="dropdown-item" style=""><i class="fa fa-gear"></i>&nbsp; Setting</a> -->
-					            <a href="javascript:void(0)" class="dropdown-item signout"><img src="images/logout.svg" width="18px">&nbsp;&nbsp;Sign out</a>
-					        </div>
-					    </div>
-					</div>
-     			</div>
-	     	</div>
-		</nav>
-		<div style="height: 110px;"></div>
-		<div id="sideNavbar" class="sideNavbar">
-			<div id="inner_sideNavbar">
+    <div class="top-header">
+        Freight Calculator
+    </div>
 
-				<a href="dashboard" title="Dashboard" id="dashboard" class="anchor_tag">
-					<img id="bydefault_svg" src="images/sidebar_icons/dashboard_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/dashboard_hover.svg">
-					<span id="navbar_text">Dashboard</span>
-				</a>
-
-				<a href="purchases" id="purchases" title="Purchases" class="anchor_tag">
-					<img id="bydefault_svg" src="images/sidebar_icons/quotation_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/quotation_hover.svg">
-					<span id="navbar_text">Country Rates </span>
-				</a>
-
-				<a href="invoices" id="invoices" title="Invoices" class="anchor_tag">
-					<img id="bydefault_svg" src="images/sidebar_icons/quotation_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/quotation_hover.svg">
-					<span id="navbar_text">Origins</span>
-				</a>
-
-				<a href="vendors" id="vendors" title="Vendors" class="anchor_tag">
-					<img id="bydefault_svg" src="images/sidebar_icons/vendor_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/vendor_hover.svg">
-					<span id="navbar_text">Countries</span>
-				</a>
-
-				<a href="clients" id="clients" title="Clients" class="anchor_tag">
-					<img id="bydefault_svg" src="images/sidebar_icons/vendor_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/vendor_hover.svg">
-					<span id="navbar_text">Customers</span>
-				</a>
-
-				<a href="#"  data-toggle="collapse" data-target="#service" class="collapsed manage_items" id="manage_items" title="Manage Items">
-					<img id="bydefault_svg" src="images/sidebar_icons/manage_product_default.svg">
-					<img id="hover_svg" src="images/sidebar_icons/manage_product_hover.svg">
-					<span id="navbar_text">Settings</span>
-				</a>
-            	<div class="collapse" id="service">
-					<a href="items" id="new_item" title="Items">&nbsp;&nbsp;
-						<img id="bydefault_svg" src="images/sidebar_icons/product_default.svg">
-							<img id="hover_svg" src="images/sidebar_icons/product_hover.svg">
-						<span id="inner_navbar_text">Country rates</span>
-					</a>
-					<a href="settings" id="settings" title="Settings">&nbsp;&nbsp;
-						<img id="bydefault_svg" src="images/sidebar_icons/product_default.svg">
-							<img id="hover_svg" src="images/sidebar_icons/product_hover.svg">
-						<span id="inner_navbar_text">other</span>
-					</a>
-					<a href="models" id="models" title="Models">&nbsp;&nbsp;
-						<img id="bydefault_svg" src="images/sidebar_icons/product_default.svg">
-							<img id="hover_svg" src="images/sidebar_icons/product_hover.svg">
-						<span id="inner_navbar_text">Models</span>
-					</a>
-					
-				</div>
-
-				<!-- <a href="#"  data-toggle="collapse" data-target="#service2" class="collapsed additionals" id="additionals" title="Additionals">
-					<div class="d-flex">
-						<div style="margin-top: 1.5px;">
-							<i id="hover_svg" class="fa fa-bars" style="font-size:22px;"></i>
-							<i id="bydefault_svg" class="fa fa-bars" style="font-size:22px;"></i>
-						</div>&nbsp;
-						<span id="navbar_text"> Reports </span>
-					</div>
-				</a>
-				<div class="collapse" id="service2">
-					<a href="reports.php" id="reports" title="Sell">
-						&nbsp;&nbsp;
-						<i id="bydefault_svg" class="fa fa-files-o" aria-hidden="true" style="font-size:21px;"></i>
-						<i id="hover_svg" class="fa fa-files-o" aria-hidden="true" style="font-size:21px;"></i>
-						<span id="inner_navbar_text">Sell</span>
-					</a>
-					<a href="reports.php" id="reports" title="Purchase">
-						&nbsp;&nbsp;
-						<i id="bydefault_svg" class="fa fa-files-o" aria-hidden="true" style="font-size:21px;"></i>
-						<i id="hover_svg" class="fa fa-files-o" aria-hidden="true" style="font-size:21px;"></i>
-						<span id="inner_navbar_text">Purchase</span>
-					</a>
-				</div> -->
-
-				<input type="hidden" name="user_name" class="user_name" value="<?php echo $user_name; ?>">
-				<input type="hidden" name="user_role" class="user_role" value="<?php echo $user_role; ?>">
-				<input type="hidden" name="super_admin" class="super_admin" value="<?php echo $super_admin; ?>">
+    <div class="d-flex">
+        <!-- Sidebar section starts -->
+        <div class="side-bar" id="side-bar">
+        <div class="logo-container">
+                <a href="home"> <img src="<?php echo $logo_with_name; ?>" class="logo-with-name <?php echo $logo_with_name_class; ?>"> </a>
+                <a href="home"> <img src="<?php echo $logo; ?>" class="logo <?php echo $logo_class; ?>"> </a>
             </div>
-		</div>
+            <nav class="sidebar-items">
 
-		<!-- Session timeoud modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-		  	<div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			      	<div class="text-left">
-				        <div class="text-center mt-3 mb-4">
-				        	<img src="./images/warning_icon.png">
-				        	<h5 class="mt-1"> Your session has expired </h5>
-				        </div>
-				        <div class="text-right mb-3 mr-3">
-				        	<button type="button" class="btn btn-sm btn-secondary session_expired" 
-				        		style="width:80px; background:#154360;"> 
-				        	Log In </button>
-				        </div>
-			      	</div>
-			    </div>
-		  	</div>
-		</div>
-		<!-- Session timeoud modal -->
-		
-<script type="text/javascript" src="js/navbar.js?clear_cache=<?php echo time();?>"></script>
-<?php
-	} else {
-		header('location: login.php');
-	}
-?>
 
+                <div class="nav-items">
+                    <a href="home" id="home" class="d-flex" title="Home">
+                        <div class="nav-items-icon"> <i class="fas fa-calculator"></i> </div>
+                        <div class="nav-items-text"> Calculator </div>
+                    </a>
+                </div>
+
+                <div class="nav-items">
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#target_location" class="d-flex collapsed location" id="location" title="location">
+                        <div class="nav-items-icon"> <i class="fas fa-map"></i> </div>
+                        <div class="nav-items-text"> Location </div>
+                    </a>
+                </div>
+                <div class="collapse" id="target_location">
+
+                    <div class="nav-items">
+                        <a href="Regions" id="regions" class="d-flex" title="regions">&nbsp; &nbsp;
+                            <div class="nav-items-icon"> <i class="fas fa-map-pin"></i> </div>
+                            <div class="nav-items-text"> Regions </div>
+                        </a>
+                    </div>
+
+                    <div class="nav-items">
+                        <a href="Countries" id="countries" class="d-flex" title="Countries">&nbsp; &nbsp;
+                            <div class="nav-items-icon"> <i class="fas fa-flag "></i> </div>
+                            <div class="nav-items-text"> Countries </div>
+                        </a>
+
+                        <div class="nav-items">
+                            <a href="ResetPassword" id="resetpassword" class="d-flex" title="Reset Password">&nbsp; &nbsp;
+                                <div class="nav-items-icon"> <i class="fas fa-city"></i> </div>
+                                <div class="nav-items-text"> Cities </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <!-- <div class="nav-items">
+                    <a href="ResetPassword" id="resetpassword" class="d-flex" title="Reset Password">
+                        <div class="nav-items-icon"> <i class="fas fa-key"></i> </div>
+                        <div class="nav-items-text">  Reset Password </div>
+                    </a>
+                </div> -->
+
+                    <div class="nav-items text-center" style="position: absolute; bottom: 0; left: 0; width: 100%; border-top: 1px solid #D0D3D4;">
+                        <div class="nav-items-text" style="color: #7f8c8d; font-size: 14px; padding: 5px;">
+                            Version: 1.0 (July-2024)
+                        </div>
+                    </div>
+            </nav>
+        </div>
+        <!-- Sidebar section ends -->
+
+        <!-- Header section starts -->
+        <div class="header" id="header">
+            <div class="d-flex align-items-center">
+                <div> <i class="fas fa-bars collapse-expand-btn"></i> </div>&nbsp;&nbsp;
+                <div class="heading"> Freight Calculator Dashboard</div>
+            </div>
+
+            <div class="d-flex header-right-bar">
+                <?php
+                $full_name = $_SESSION['full_name'];
+                $full_name = explode(" ", $full_name);
+                $name = strtolower($full_name[0]);
+                if (count($full_name) > 1) {
+                    if ($name == "muhammad" || $name == "mohammad") {
+                        $_fullname = $full_name[1];
+                    } else {
+                        $_fullname = $full_name[0];
+                    }
+                } else {
+                    $_fullname = $full_name[0];
+                }
+                ?>
+                <div class="user-name"> Welcome <span> <?php echo $_fullname; ?> </span> </div>&nbsp;&nbsp;
+
+                <div class="dropdown">
+                    <div class="profile-picture" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="images/user-icon.png">
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-list" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="signout">
+                                <img src="images/logout.svg" width="18px">&nbsp;&nbsp; Sign out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="signout">
+                    <a href="signout" title="Sign out">
+                        <img src="images/logout.svg" width="18px">&nbsp; Sign out
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Header section ends -->
+
+        <!-- Session timeout modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content session-expired-container">
+                    <div class="text-left pt-4 main-container">
+                        <div class="d-flex align-items-center">
+                            <div class="icon">
+                                <img src="images/warning.png">
+                            </div>
+                            <div class="text">
+                                <div>
+                                    <h5> Your session has expired </h5>
+                                </div>
+                                <div style="margin-top:-2px"> Please log in again to continue using the app </div>
+                            </div>
+                        </div>
+                        <div class="text-end pt-3">
+                            <button type="button" class="btn btn-sm btn-secondary login-again"> Log In </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Session timeout modal -->
+    </div>
+</div>
+
+<script src="js/navbar.js?clear_cache=<?php echo time(); ?>"></script>

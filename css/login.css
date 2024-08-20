@@ -1,0 +1,134 @@
+.login-layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+.login-form-container {
+    border:1px solid #ECF0F1;
+    border-top: 4px solid #FC9C10;
+    margin: auto;
+    border-radius: 1.2rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 460px;
+}
+.login-form-container .logo {
+    /* margin-top: 26px;
+    margin-bottom: 26px; */
+    margin: 20px 0px;
+}
+/* .login-form-container .logo img {
+    width: 220px;
+} */
+
+.login-form-container h3 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #ECF0F1;
+    background-color: #FBFCFC;
+    padding: 8px;
+    padding-top: 2px;
+    color:#154360;
+}
+
+.login-form {
+    padding: 0px 20px 20px 20px;
+}
+
+.login-form-container .login-form .input {
+    margin-top: 11px;
+}
+.login-form-container .login-form .input input {
+    border:1px solid #D0D3D4;
+    background-color: #FFFFFF;
+    height: 34px;
+}
+.login-form-container .login-form .input input:focus {
+    border: inherit;
+    outline: 0;
+    box-shadow: none;
+    background-color: #FDFEFE;
+    border:1px solid #B3B6B7;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 10px;
+}
+.login-form-container .login-form .submit {
+/*    margin-top: 30px;*/
+}
+.login-form-container .login-form .loader {
+    color: #14213D !important;
+    font-size:28px;
+    background: #FFFFFF;
+    border: none;
+    padding: 0px;
+}
+
+.login-form-container .login-form .submit-btn {
+    background-color: #FC9C10;
+    width: 172px;
+    padding: 2px;
+    padding-bottom: 3.8px;
+    border:none;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    color:white;
+    opacity: 0.98;
+}
+.login-form-container .login-form .submit-btn:hover {
+    opacity: 1;
+}
+.login-form-container .login-form .submit-btn.active {
+    opacity: 0.5;
+}
+.login-form-container .login-form .submit-btn.active:hover {
+    opacity: 0.5;
+}
+
+#password-div {
+    position: relative;
+}
+#password-div .show-password-icon {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+}
+#password-div .show-password-icon:hover {
+    cursor: pointer;
+}
+
+
+.swal-modal {
+    width: 460px !important;
+}
+.swal-footer {
+    margin-top:5px !important;
+}
+.swal-button--confirm{
+    border: inherit !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    border:none !important;
+}
+
+
+@media screen and (max-width: 1198px) {
+    html {
+        font-size: 100%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .login-layout {
+        padding:18px; 
+    }
+    .login-form-container .logo img {
+        width: 200px;
+    }
+    .login-form-container .login-form .submit-btn {
+        width: 160px;
+        padding: 1.5px;
+        padding-bottom: 3.5px;
+        border-radius: 30px;
+        font-size: 1.2rem;
+    }
+}

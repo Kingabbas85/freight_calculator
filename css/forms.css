@@ -1,0 +1,80 @@
+.date, .time {
+    background-color:#FFFFFF !important;
+}
+.datepicker {
+    border:1px solid #D0D3D4;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 24px;
+    padding:10px;
+    color: #154360;
+    border-radius:0px;
+    margin-top:4px;
+} 
+.datepicker td {
+    width: 40px;
+    height: 40px;
+}
+.datepicker table tr td:hover {
+    border-radius:30px;
+}
+.datepicker table tr td.active.active {
+    background:#154360;
+    border-radius:30px;
+}
+.datepicker table tr td.active.active:hover {
+    background:#D0D3D4;
+    border-radius:30px;
+}
+.datepicker .datepicker-switch {
+    padding: 5px 0px 5px 0px;
+}
+.datepicker .datepicker-switch:hover {
+    border-radius: 50px;
+}
+
+
+.for-icon {
+    position: relative;
+}
+.for-icon span {
+    position: absolute;
+    top:24px;
+    right:8px;
+    pointer-events:none;
+}
+
+textarea {
+    resize:none;
+    height: 75px;
+}
+
+
+.popover {
+    border: 1px solid #D0D3D4;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 24px;
+    padding: 0px;
+    margin-top: 5px;
+    border-radius: 0px;
+}
+.clockpicker-dial {
+    margin: auto !important;
+    text-align: center !important;
+    padding-left: 100px !important;
+}
+.popover-title {
+    padding: 4px 10px;
+    background-color: #F4F6F7 !important;
+    border-bottom: 1px solid #E5E7E9;
+}
+.popover-content {
+    background-color: #FDFEFE !important;
+}
+
+.popover-title .text-primary {
+    color: #154360 !important;
+}
+
+.clockpicker-tick.active {
+    background-color: red !important;
+    color:red !important;
+}
+
