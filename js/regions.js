@@ -141,8 +141,10 @@ $(document).ready(function () {
 						$(".success-alert").css("display", "flex")
 						fadeOutAlertMessage()
 					} else {
-						$(".error-alert").css("display", "flex")
-						fadeOutAlertMessage()
+						swal({
+							text: "Error deleting region!",
+							icon: "error",
+						})
 					}
 					setTimeout(function () {
 						window.location.href = "Regions"
@@ -175,12 +177,12 @@ $(document).ready(function () {
 					success: function (response) {
 						$(".loader-div").hide() // hide loader
 						if (response == 1) {
-							swal({
-								text: "Region deleted successfully!",
-								icon: "success",
-							}).then(function () {
-								window.location.reload()
-							})
+							$(".success-alert-text").text(
+								"Region deletd Successfully"
+							)
+							$(".success-alert").css("display", "flex")
+							fadeOutAlertMessage()
+							window.location.reload()
 						} else {
 							swal({
 								text: "Error deleting region!",
@@ -192,4 +194,5 @@ $(document).ready(function () {
 			}
 		})
 	})
+	
 })

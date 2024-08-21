@@ -79,7 +79,8 @@ if (isset($_SESSION['user_email']) == true) {
 										echo '<td>' . $count++ . '</td>';
 										echo '<td>' . $name . '</td>';
 										echo '<td class="text-center">';
-										echo '<a href="EditRegion?id=' . md5($id) . '"> <i class="fas fa-edit text-primary"></i> </a>';
+										echo '<a href="EditRegion?id=' . md5($id) . '" > <i class="fas fa-edit text-primary"></i> </a>&nbsp;'
+										;
 										echo '<a href="javascript:void(0);" class="delete-region-btn" data-id="' . $id . '">
 												<i class="fas fa-trash text-danger"></i>
 											</a>';
@@ -101,18 +102,6 @@ if (isset($_SESSION['user_email']) == true) {
 
 		</html>
 		<script type="text/javascript" src="js/regions.js?clear_cache=<?php echo time(); ?>"></script>
-		<script type="text/javascript">
-			// var startDate = moment().startOf('year');
-			// var endDate = moment().endOf('month');
-			// $("#daterange").daterangepicker({
-			//  	startDate: startDate,
-			//  	endDate: endDate,
-			//  	locale: { 
-			//    	format: 'MMM DD, YYYY',
-			//  	},
-			//  	maxDate: moment() // Restrict forward dates to today
-			// });
-		</script>
 <?php
 
 } else {

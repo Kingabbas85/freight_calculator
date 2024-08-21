@@ -1301,3 +1301,35 @@ function calculateCurrentSessionTime($connection, $username, $checkout_date, $ch
 // 	}
 // 	return false;
 // }
+
+
+
+function getRegionNameById($connection, $region_id)
+{
+    $region_name = "";
+    $query = "SELECT * FROM regions WHERE Id = '$region_id'";
+    $result = mysqli_query($connection, $query);
+    
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $region_name = ucwords($row['name']);
+        }
+    }
+    
+    return $region_name;
+}
+
+function getCountryNameById($connection, $country_id)
+{
+    $country_name = "";
+    $query = "SELECT * FROM countries WHERE Id = '$country_id'";
+    $result = mysqli_query($connection, $query);
+    
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $country_name = ucwords($row['name']);
+        }
+    }
+    
+    return $country_name;
+}

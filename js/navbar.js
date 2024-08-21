@@ -7,16 +7,34 @@ $(document).ready(function(){
 	// active sidebar
 	$(".side-bar .sidebar-items a#"+id).addClass("active");
 
-	if (id == "Countries") {
-		$(".side-bar .sidebar-items a#countries").addClass("active");
-		$(".side-bar .sidebar-items a#resetpassword").addClass("active");
-	}
-
+	
 	if ( id == "regions" || id == "newregion" || id == "editregion" ) {
 		$(".side-bar .sidebar-items a#location").addClass("active");
 		$(".side-bar .sidebar-items a#regions").addClass("active");
 	}
+	
+	if (id == "countries" || id == "newcountry" || id == "editcountry") {
+		$(".side-bar .sidebar-items a#countries").addClass("active");
+		$(".side-bar .sidebar-items a#location").addClass("active");
+	}
 
+	if (id == "cities" || id == "newcity" || id == "editcity") {
+		$(".side-bar .sidebar-items a#cities").addClass("active");
+		$(".side-bar .sidebar-items a#location").addClass("active");
+	}
+
+	if (id == "entities" || id == "newentity" || id == "editentity") {
+		$(".side-bar .sidebar-items a#entities").addClass("active");
+	}
+	if (id == "customers" || id == "newcustomer" || id == "editcustomer") {
+		$(".side-bar .sidebar-items a#customers").addClass("active");
+	}
+	if (id == "rates" || id == "newrate" || id == "editrate") {
+		$(".side-bar .sidebar-items a#rates").addClass("active");
+	}
+	if (id == "settings") {
+		$(".side-bar .sidebar-items a#settings").addClass("active");
+	}
 	// collapse-expand sidebar starts
 	let sideBar = document.querySelector('.side-bar');
 	let header = document.querySelector('.header');

@@ -26,7 +26,7 @@ $username = $_SESSION['user_name'];
     <div class="d-flex">
         <!-- Sidebar section starts -->
         <div class="side-bar" id="side-bar">
-        <div class="logo-container">
+            <div class="logo-container">
                 <a href="home"> <img src="<?php echo $logo_with_name; ?>" class="logo-with-name <?php echo $logo_with_name_class; ?>"> </a>
                 <a href="home"> <img src="<?php echo $logo; ?>" class="logo <?php echo $logo_class; ?>"> </a>
             </div>
@@ -40,6 +40,24 @@ $username = $_SESSION['user_name'];
                     </a>
                 </div>
 
+                <div class="nav-items">
+                    <a href="Entities" id="entities" class="d-flex" title="Entity">
+                        <div class="nav-items-icon"> <i class="fas fa-user"></i> </div>
+                        <div class="nav-items-text"> Entity </div>
+                    </a>
+                </div>
+                <div class="nav-items">
+                    <a href="Customers" id="customers" class="d-flex" title="Customers">
+                        <div class="nav-items-icon"> <i class="fas fa-users"></i> </div>
+                        <div class="nav-items-text"> Customers </div>
+                    </a>
+                </div>
+                <div class="nav-items">
+                    <a href="Rates" id="rates" class="d-flex" title="Rates">
+                        <div class="nav-items-icon"> <i class="fas fa-dollar"></i> </div>
+                        <div class="nav-items-text"> Rates </div>
+                    </a>
+                </div>
                 <div class="nav-items">
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#target_location" class="d-flex collapsed location" id="location" title="location">
                         <div class="nav-items-icon"> <i class="fas fa-map"></i> </div>
@@ -62,29 +80,35 @@ $username = $_SESSION['user_name'];
                         </a>
 
                         <div class="nav-items">
-                            <a href="ResetPassword" id="resetpassword" class="d-flex" title="Reset Password">&nbsp; &nbsp;
+                            <a href="Cities" id="cities" class="d-flex" title="Cities">&nbsp; &nbsp;
                                 <div class="nav-items-icon"> <i class="fas fa-city"></i> </div>
                                 <div class="nav-items-text"> Cities </div>
                             </a>
                         </div>
-
                     </div>
 
+                </div>
+                <div class="nav-items">
+                    <a href="Settings" id="settings" class="d-flex" title="Settings">
+                        <div class="nav-items-icon"> <i class="fas fa-gear"></i> </div>
+                        <div class="nav-items-text"> Settings </div>
+                    </a>
+                </div>
 
 
 
-                    <!-- <div class="nav-items">
+                <!-- <div class="nav-items">
                     <a href="ResetPassword" id="resetpassword" class="d-flex" title="Reset Password">
                         <div class="nav-items-icon"> <i class="fas fa-key"></i> </div>
                         <div class="nav-items-text">  Reset Password </div>
                     </a>
                 </div> -->
 
-                    <div class="nav-items text-center" style="position: absolute; bottom: 0; left: 0; width: 100%; border-top: 1px solid #D0D3D4;">
-                        <div class="nav-items-text" style="color: #7f8c8d; font-size: 14px; padding: 5px;">
-                            Version: 1.0 (July-2024)
-                        </div>
+                <div class="nav-items text-center" style="position: absolute; bottom: 0; left: 0; width: 100%; border-top: 1px solid #D0D3D4;">
+                    <div class="nav-items-text" style="color: #7f8c8d; font-size: 14px; padding: 5px;">
+                        Version: 1.0 (Aug-2024)
                     </div>
+                </div>
             </nav>
         </div>
         <!-- Sidebar section ends -->

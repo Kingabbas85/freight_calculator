@@ -26,7 +26,6 @@
 
 	<link rel="stylesheet" type="text/css" href="css/libraries/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/libraries/datepicker.min.css">
-	<link rel="stylesheet" type="text/css" href="packages/clockpicker/dist/bootstrap-clockpicker.min.css">
    <!-- css libraries -->
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css"> -->
 
@@ -47,7 +46,6 @@
 	<script type="text/javascript" src="js/libraries/moment.min.js"></script>
 	<script type="text/javascript" src="js/libraries/daterangepicker.js"></script>
 	<script type="text/javascript" src="js/libraries/datepicker.min.js"></script>
-	<script type="text/javascript" src="packages/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
 	<script type="text/javascript" src="js/libraries/tokenfield.js"></script>
 	<script type="text/javascript" src="js/libraries/select.min.js"></script>
 
