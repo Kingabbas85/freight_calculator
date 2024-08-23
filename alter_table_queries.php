@@ -193,6 +193,37 @@ if (isset($_SESSION['user_email']) == true) {
                         echo '<div class="alert alert-warning">Table "customers" already exists. No action needed.</div>';
                     }
 
+
+                    /* -------------------------------------------------------------------------- */
+                    /*                   // Check if the 'settings' table exists                  */
+                    /* -------------------------------------------------------------------------- */
+                    $checkSettingsTableQuery = "SHOW TABLES LIKE 'settings'";
+                    $settingsTableExists = $connection->query($checkSettingsTableQuery)->num_rows > 0;
+
+                    if (!$settingsTableExists) {
+                        // Define the new table name
+                        $newTableName = 'settings';
+
+                        // SQL statement to create the table
+                        $createTableSQL = "CREATE TABLE $newTableName (
+                            Id INT AUTO_INCREMENT PRIMARY KEY,
+                            name VARCHAR(255) NOT NULL,
+                            val TEXT NOT NULL,
+                            `group` VARCHAR(255) NOT NULL,
+                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                        )";
+
+                        // Execute the query and check the result
+                        if ($connection->query($createTableSQL) === TRUE) {
+                            echo '<div class="alert alert-success">Table "' . $newTableName . '" created successfully.</div>';
+                        } else {
+                            echo '<div class="alert alert-danger">Error creating the table: ' . $connection->error . '</div>';
+                        }
+                    } else {
+                        // Table exists, show message
+                        echo '<div class="alert alert-warning">Table "settings" already exists. No action needed.</div>';
+                    }
                    
 
 

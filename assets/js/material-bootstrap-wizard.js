@@ -29,17 +29,14 @@ $(document).ready(function(){
     // Code for the Validator
     var $validator = $('.wizard-card form').validate({
 		  rules: {
-		    firstname: {
+		    estimate_from: {
 		      required: true,
-		      minlength: 3
 		    },
-		    lastname: {
+		    ship_from: {
 		      required: true,
-		      minlength: 3
 		    },
-		    email: {
+		    ship_to: {
 		      required: true,
-		      minlength: 3,
 		    }
         },
 
@@ -151,6 +148,262 @@ $(document).ready(function(){
     });
 
     $('.set-full-height').css('height', 'auto');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    // custom code
+    $("#shipping_details #ship_to").change(function(){
+
+        var ship_to = $(this).val();
+        console.log(ship_to);
+        $.ajax({
+            url: Domain + "/ajaxcallforcalculation.php",
+            method: "POST",
+            data: {
+            	getDutyTaxes: 1,
+            	ship_to: ship_to,
+            },
+            success: function (response) {
+                // console.log(response);
+                response = JSON.parse(response);
+                console.log(response.message);
+                var duty_tax = response.message.duty_tax;
+                var customs_brokerage = response.message.customs_brokerage;
+                var handling = response.message.handling;
+                var ior = response.message.ior;
+                var admin_bank_charges = response.message.admin_bank_charges;
+
+
+                $("#duty_tax_value").val(duty_tax);
+                $("#customs_brokerage_value").val(customs_brokerage);
+                $("#handling_value").val(handling);
+                $("#ior_value").val(ior);
+                $("#admin_bank_charges_value").val(admin_bank_charges);
+
+                Calculate();
+            },
+        });
+    });
+
+    
+
+
+    function Calculate() {
+        var duty_tax = $("#duty_tax_value").val();
+        var customs_brokerage = $("#customs_brokerage_value").val();
+        var handling = $("#handling_value").val();
+        var ior = $("#ior_value").val();
+        var admin_bank_charges = $("#admin_bank_charges_value").val();
+        
+
+        var cargo_value = $("#cargo_value").val();
+        cargo_value = cargo_value * 1;
+
+        if (cargo_value == 0) {
+            $("#ior").val(0);
+            $("#duty_tax").val(0);
+            $(".ior_label_class").removeClass("is-empty");
+            $(".dusty_tax_label_class").addClass("is-empty");
+
+        } else {
+            
+            if ((cargo_value * 0.05) > ior) {
+                $(".ior_label").hide();
+                $("#ior").val(cargo_value * 0.05);
+            } else {
+                $(".ior_label").hide()
+                $("#ior").val(ior);
+            }
+            $(".ior_label_class").removeClass("is-empty");
+            $(".dusty_tax_label_class").removeClass("is-empty");
+        }
+        if (cargo_value == "") {
+            $("#ior").val("");
+            $("#duty_tax").val("");
+            
+            $(".ior_label_class").addClass("is-empty");
+            $(".dusty_tax_label_class").addClass("is-empty");
+
+        }
+        //DutyTax
+        if(cargo_value)
+        {
+            var duty_tax_percentage = duty_tax / 100;     //country wise from rates table
+            $("#duty_tax").val(cargo_value * duty_tax_percentage); // Set the calculated duty tax value
+        }
+
+        // Custom brokerage
+        if (customs_brokerage) {
+            $(".customs_brokerage_label").removeClass("is-empty");
+            $("#customs_brokerage").val(customs_brokerage); //country wise from rates table
+        }
+
+        // Handling charges
+        var package_gross_weight = parseFloat($("#package_gross_weight").val());
+        var volumetric_weight = parseFloat($("#volumetric_weight").val());
+        console.log(package_gross_weight,volumetric_weight);
+        // Calculate the three values
+        if(volumetric_weight &&  package_gross_weight)
+            {
+            var flat_fee = handling;
+            var gross_weight_fee = package_gross_weight * 0.75;
+            var volumetric_weight_fee = volumetric_weight * 0.75;
+            // Get the maximum value among the three
+            var max_value = Math.max(flat_fee, gross_weight_fee, volumetric_weight_fee);
+            if(max_value){
+                $("#handling_charges").val(max_value.toFixed(2));
+                $(".handling_charges_span").text(max_value.toFixed(2));
+            }
+
+        }
+
+        //Admin Bank Charges
+        if (admin_bank_charges) {
+            $(".admin_bank_charges_label").removeClass("is-empty");
+            $("#admin_bank_charges").val(admin_bank_charges); //country wise from rates table
+        }
+        // Display the result (e.g., in an element with id 'max_value')
+
+        //Last Time delivery
+        var last_mile_delivery_fee =   $("#last_mile_delivery").val();
+
+        if(volumetric_weight &&  package_gross_weight && last_mile_delivery_fee)
+        {
+            var last_fee = last_mile_delivery_fee;
+            var gross_weight_fee = package_gross_weight * 1;
+            var volumetric_weight_fee = volumetric_weight * 1;
+
+            // Get the maximum value among the three
+            var last_mile_delivery_charge = Math.max(last_fee, gross_weight_fee, volumetric_weight_fee);
+
+            // Display the result (e.g., in an element with id 'last_mile_delivery')
+            $("#last_mile_delivery").val(last_mile_delivery_charge.toFixed(2));
+        }
+        //Call 
+        calculateGrandTotal();
+
+    }
+
+    $("#charges #cargo_value").keyup(function(){
+        Calculate();
+        calculateGrandTotal();
+    })
+
+    $("#package_gross_weight").keyup(function(){
+        Calculate();
+        calculateGrandTotal();
+    })
+
+    //////////////////For last time 
+    //setup before functions
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 3000;  //time in ms, 5 seconds for example
+    var $input = $('#last_mile_delivery');
+
+    //on keyup, start the countdown
+    $input.on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown 
+    $input.on('keydown', function () {
+    clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping () {
+        Calculate();
+        calculateGrandTotal();
+    }
+    //////////////////For last time 
+
+    $("#length, #width, #height").keyup(function() {
+        // Get the values from the length, width, and height fields
+        var length = $("#length").val() * 1;
+        var width = $("#width").val() * 1;
+        var height = $("#height").val() * 1;
+    
+        // Calculate the package dimension (volume)
+        var packageDimension = length * width * height;
+    
+        // Set the package dimension value in the disabled input
+        $("#package_dimension").val(packageDimension.toFixed(2));
+    
+        // Calculate the volumetric weight (package dimension divided by 5000)
+        var volumetricWeight = packageDimension / 5000;
+    
+        // Set the volumetric weight value in the disabled input
+        $("#volumetric_weight").val(volumetricWeight.toFixed(2));
+        if(length || width || height)
+        {
+            $(".package_dimension_label_class").removeClass("is-empty");
+            $(".volumetric_weight_label_class").removeClass("is-empty");
+            
+        }
+        if (length == "" && width == "" && height == "" ) {
+            $("#package_dimension").val("");
+            $("#volumetric_weight").val("");
+            $(".package_dimension_label_class").addClass("is-empty");
+            $(".volumetric_weight_label_class").addClass("is-empty");
+        }
+
+        Calculate();
+        calculateGrandTotal();
+    
+        // // Calculate the handling charges or any other values here
+        // var handlingValue = volumetricWeight * /* your rate or calculation here */;
+        
+        // // Display the handling value in the span with class handling_value
+        // $(".handling_value").text(handlingValue);
+        
+    });
+
+    $('#ior, #duty_tax, #freight, #customs_brokerage, #import_permit_approval, #handling_charges, #admin_bank_charges, #compliance_certification, #storage, #last_mile_delivery').on('input', calculateGrandTotal);
+    function calculateGrandTotal() {
+        // Initialize total
+        var total = 0;
+
+        // Sum the values of the input fields
+        total += parseFloat($('#ior').val()) || 0;
+        total += parseFloat($('#duty_tax').val()) || 0;
+        total += parseFloat($('#freight').val()) || 0;
+        total += parseFloat($('#customs_brokerage').val()) || 0;
+        total += parseFloat($('#import_permit_approval').val()) || 0;
+        total += parseFloat($('#handling_charges').val()) || 0;
+        total += parseFloat($('#admin_bank_charges').val()) || 0;
+        total += parseFloat($('#compliance_certification').val()) || 0;
+        total += parseFloat($('#storage').val()) || 0;
+        total += parseFloat($('#last_mile_delivery').val()) || 0;
+
+        
+
+        // Update the grand_total field
+        $('#grand_total').val(total.toFixed(2));
+        $(".grand_total_label").removeClass("is-empty");
+    }
+
+    
+
 
 });
 

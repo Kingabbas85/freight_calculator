@@ -322,6 +322,7 @@
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_role'] = $user_role;
                 $_SESSION['active'] = $status;
+                $_SESSION["loggedIn"] = true;
             }
             echo 1;
         } else {

@@ -4,67 +4,69 @@ include_once('database/database.php');
 require('packages/PHPExcel/Classes/PHPExcel.php');
 // require __DIR__ . '/packages/zkteco/vendor/autoload.php';
 
-use Rats\Zkteco\Lib\ZKTeco;
 
 header('Content-Type: application/json');
 
 if (isset($_POST["action"]) && $_POST["action"] == "SaveSettings") {
-    // Retrieve the form data
-    $device_ip = $_POST["device_ip"];
-    $device_admin_role_id = $_POST["device_admin_role_id"];
+    $default_ior = $_POST['default_ior'];
+    $default_duty_tax = $_POST['default_duty_tax'];
+    $default_handling_charges = $_POST['default_handling_charges'];
+    $default_customs_brokerage = $_POST['default_customs_brokerage'];
+    $admin_bank_charges = $_POST['admin_bank_charges'];
 
-    // Update or insert `device_ip`
-    $query_device_ip = "SELECT * FROM settings WHERE name = 'device_ip'";
-    $result_device_ip = mysqli_query($connection, $query_device_ip);
+    // Array of settings
+    $settings = [
+        'default_ior' => $default_ior,
+        'default_duty_tax' => $default_duty_tax,
+        'default_handling_charges' => $default_handling_charges,
+        'default_customs_brokerage' => $default_customs_brokerage,
+        'admin_bank_charges' => $admin_bank_charges
+    ];
 
-    if (mysqli_num_rows($result_device_ip) > 0) {
-        // Update existing `device_ip`
-        $update_device_ip = "UPDATE settings SET val = '$device_ip', updated_at = NOW() WHERE name = 'device_ip'";
-        $result_update_device_ip = mysqli_query($connection, $update_device_ip);
-    } else {
-        // Insert new `device_ip`
-        $insert_device_ip = "INSERT INTO settings (name, val, `group`, created_at, updated_at) VALUES ('device_ip', '$device_ip', 'device', NOW(), NOW())";
-        $result_insert_device_ip = mysqli_query($connection, $insert_device_ip);
+    // Check existing settings
+    $queryCheck = "SELECT name FROM settings WHERE name IN ('default_ior', 'default_duty_tax', 'default_handling_charges', 'default_customs_brokerage', 'admin_bank_charges')";
+    $resultCheck = mysqli_query($connection, $queryCheck);
+
+    // Collect existing setting names
+    $existingSettings = [];
+    while ($row = mysqli_fetch_assoc($resultCheck)) {
+        $existingSettings[] = $row['name'];
     }
 
-    // Update or insert `device_admin_role_id`
-    $query_device_admin_role_id = "SELECT * FROM settings WHERE name = 'device_admin_role_id'";
-    $result_device_admin_role_id = mysqli_query($connection, $query_device_admin_role_id);
-
-    if (mysqli_num_rows($result_device_admin_role_id) > 0) {
-        // Update existing `device_admin_role_id`
-        $update_device_admin_role_id = "UPDATE settings SET val = '$device_admin_role_id', updated_at = NOW() WHERE name = 'device_admin_role_id'";
-        $result_update_device_admin_role_id = mysqli_query($connection, $update_device_admin_role_id);
-    } else {
-        // Insert new `device_admin_role_id`
-        $insert_device_admin_role_id = "INSERT INTO settings (name, val, `group`, created_at, updated_at) VALUES ('device_admin_role_id', '$device_admin_role_id', 'device', NOW(), NOW())";
-        $result_insert_device_admin_role_id = mysqli_query($connection, $insert_device_admin_role_id);
+    // Loop through each setting
+    foreach ($settings as $name => $value) {
+        if (in_array($name, $existingSettings)) {
+            // Update existing setting
+            $queryUpdate = "UPDATE settings SET val = '$value' WHERE name = '$name'";
+            mysqli_query($connection, $queryUpdate);
+        } else {
+            // Insert new setting
+            $queryInsert = "INSERT INTO settings (name, val) VALUES ('$name', '$value')";
+            mysqli_query($connection, $queryInsert);
+        }
     }
 
-    if (($result_update_device_ip || $result_insert_device_ip) && ($result_update_device_admin_role_id || $result_insert_device_admin_role_id)) {
-        echo 1;
-    } else {
-        echo "ERROR";
-    }
+    echo json_encode(['status' => 'success', 'message' => 'Settings saved successfully!']);
 }
 
-// Preload form values from the database
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $settings = [];
-    $getSettingsSQL = "SELECT name, val FROM settings WHERE name IN ('device_ip', 'device_admin_role_id')";
-    $result = mysqli_query($connection, $getSettingsSQL);
 
+
+if (isset($_POST["getAllSettings"])) {
+    $settings = [];
+    $query = "SELECT * FROM settings";
+    $result = mysqli_query($connection, $query);
+    
     while ($row = mysqli_fetch_assoc($result)) {
         $settings[$row['name']] = $row['val'];
     }
-
+    
     echo json_encode($settings);
 }
 
 /* -------------------------------------------------------------------------- */
 /*                     // Import Countries                                    */
 /* -------------------------------------------------------------------------- */
-if (isset($_POST['importCountriesFromExcel'])) {
+if (isset($_POST['importCountriesFromExcel']) && $_POST["importCountriesFromExcel"] == 1) {
     // Create a new PHPExcel object
 
     // Load an existing spreadsheet
@@ -104,8 +106,6 @@ if (isset($_POST['importCountriesFromExcel'])) {
     // }
     // $zk->disconnect();
     echo json_encode(['status' => 'success', 'message' => 'Country Imported successfully']);
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'Please check device connection']);
 }
         // $users = $zk->deviceName(); // Assuming getUser() pulls all users
         // $finger_user = $zk->getFingerprint(2); // Assuming getUser() pulls all users

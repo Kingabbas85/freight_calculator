@@ -884,25 +884,7 @@ function getLastZkId($connection)
 		return 0; // Return null if no zk_id is found
 	}
 }
-/**
- * Get the value of a specific setting by its name.
- *
- * @param string $settingName The name of the setting to retrieve.
- * @return string|null The value of the setting, or null if not found.
- */
-function getSettingRecord($connection, $id)
-{
-	$query = "SELECT * FROM settings WHERE Id = '$id'";
-	$result = mysqli_query($connection, $query);
-	if ($result && mysqli_num_rows($result)) {
-		while ($row = mysqli_fetch_assoc($result)) {
-			$ip = $row['ip'];
-			return $ip;
-		}
-	} else {
-		return null; // Return null if the setting is not found
-	}
-}
+
 /**
  * Get the value of a specific setting by its name.
  *
@@ -1332,4 +1314,40 @@ function getCountryNameById($connection, $country_id)
     }
     
     return $country_name;
+}
+
+function getEntityNameByCountryId($connection, $country_id)
+{
+    $country_name = "";
+    $query = "SELECT * FROM countries WHERE Id = '$country_id'";
+    $result = mysqli_query($connection, $query);
+    
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Get the first three letters of the country name
+            $country_name = strtoupper(substr($row['name'], 0, 3)) . " ENTITY";
+        }
+    }
+    
+    return $country_name;
+}
+
+/**
+ * Get the value of a specific setting by its name.
+ *
+ * @param string $settingName The name of the setting to retrieve.
+ * @return string|null The value of the setting, or null if not found.
+ */
+function getDefaultValuesByName($connection, $name)
+{
+	$query = "SELECT * FROM settings WHERE name = '$name'";
+	$result = mysqli_query($connection, $query);
+	if ($result && mysqli_num_rows($result)) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$val = $row['val'];
+			return $val;
+		}
+	} else {
+		return null; // Return null if the setting is not found
+	}
 }
