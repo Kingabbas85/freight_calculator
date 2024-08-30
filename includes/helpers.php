@@ -1316,6 +1316,22 @@ function getCountryNameById($connection, $country_id)
     return $country_name;
 }
 
+function getCityNameById($connection, $city_id)
+{
+    $city_name = "";
+    $query = "SELECT * FROM cities WHERE Id = '$city_id'";
+    $result = mysqli_query($connection, $query);
+    
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $city_name = ucwords($row['name']);
+        }
+    }
+    
+    return $city_name;
+}
+
+
 function getEntityNameByCountryId($connection, $country_id)
 {
     $country_name = "";
@@ -1350,4 +1366,75 @@ function getDefaultValuesByName($connection, $name)
 	} else {
 		return null; // Return null if the setting is not found
 	}
+}
+
+function getEntityById($connection, $entity_id)
+{
+    $entity = null; // Initialize the entity as null
+    
+    // SQL query to fetch the entity by its ID
+    $query = "SELECT * FROM entities WHERE Id = '$entity_id'";
+    $result = mysqli_query($connection, $query);
+    
+    // Check if the result has any rows
+    if (mysqli_num_rows($result)) {
+        // Fetch the entity as an associative array
+        $entity = mysqli_fetch_assoc($result);
+    }
+    
+    // Return the entity object (or null if not found)
+    return $entity;
+}
+
+function getCustomerById($connection, $customer_id)
+{
+    $customer = null; // Initialize the customer as null
+    
+    // SQL query to fetch the customer by its customer_id
+    $query = "SELECT * FROM customers WHERE Id = '$customer_id'";
+    $result = mysqli_query($connection, $query);
+    
+    // Check if the result has any rows
+    if (mysqli_num_rows($result)) {
+        // Fetch the customer as an associative array
+        $customer = mysqli_fetch_assoc($result);
+    }
+    
+    // Return the customer object (or null if not found)
+    return $customer;
+}
+
+function CreateFourDigitNumber($number)
+{
+
+	if ($number <= 9) {
+		$number = "000" . $number;
+	}
+	if ($number > 9 && $number <= 99) {
+		$number = "00" . $number;
+	}
+	if ($number > 99 && $number <= 999) {
+		$number = "0" . $number;
+	}
+	return $number;
+}
+function CreateSixDigitNumber($number)
+{
+
+	if ($number <= 9) {
+		$number = "00000" . $number;
+	}
+	if ($number > 9 && $number <= 99) {
+		$number = "0000" . $number;
+	}
+	if ($number > 99 && $number <= 999) {
+		$number = "000" . $number;
+	}
+	if ($number > 999 && $number <= 9999) {
+		$number = "00" . $number;
+	}
+	if ($number > 9999 && $number <= 99999) {
+		$number = "0" . $number;
+	}
+	return $number;
 }

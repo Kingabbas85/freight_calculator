@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 16, 2024 at 02:35 PM
+-- Generation Time: Aug 30, 2024 at 06:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `freight_calculator_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `Id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`Id`, `name`, `country_id`, `created_at`, `updated_at`) VALUES
+(1, 'Lahore', 133, '2024-08-21 10:26:05', '2024-08-21 13:11:32'),
+(2, 'Delhi', 76, '2024-08-21 11:09:24', '2024-08-21 11:09:24'),
+(3, 'Sharjah', 184, '2024-08-21 13:13:39', '2024-08-21 13:13:39');
 
 -- --------------------------------------------------------
 
@@ -119,179 +142,311 @@ INSERT INTO `counter` (`Id`, `type`, `count`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `Id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `country_code` varchar(10) NOT NULL,
+  `region_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`Id`, `name`, `country_code`, `region_id`, `created_at`, `updated_at`) VALUES
+(2, 'Albania', 'al', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(3, 'Algeria', 'dz', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(4, 'Andorra', 'ad', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(5, 'Angola', 'ao', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(6, 'Antigua and Barbuda', 'ag', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(7, 'Argentina', 'ar', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(8, 'Armenia', 'am', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(9, 'Australia', 'au', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(10, 'Austria', 'at', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(11, 'Azerbaijan', 'az', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(12, 'Bahamas', 'bs', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(13, 'Bahrain', 'bh', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(14, 'Bangladesh', 'bd', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(15, 'Barbados', 'bb', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(16, 'Belarus', 'by', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(17, 'Belgium', 'be', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(18, 'Belize', 'bz', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(19, 'Benin', 'bj', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(20, 'Bhutan', 'bt', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(21, 'Bolivia', '', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(22, 'Bosnia and Herzegovina', 'ba', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(23, 'Botswana', 'bw', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(24, 'Brazil', 'br', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(25, 'Brunei', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(26, 'Bulgaria', 'bg', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(27, 'Burkina Faso', 'bf', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(28, 'Burundi', 'bi', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(29, 'Cabo Verde', 'cv', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(30, 'Cambodia', 'kh', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(31, 'Cameroon', 'cm', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(32, 'Canada', 'ca', 2, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(33, 'Central African Republic', 'cf', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(34, 'Chad', 'td', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(35, 'Chile', 'cl', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(36, 'China', 'cn', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(37, 'Colombia', 'co', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(38, 'Comoros', 'km', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(39, 'Congo', 'cg', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(40, 'Costa Rica', 'cr', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(41, 'Croatia', 'hr', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(42, 'Cuba', 'cu', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(43, 'Cyprus', 'cy', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(44, 'Czech Republic', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(45, 'Denmark', 'dk', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(46, 'Djibouti', 'dj', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(47, 'Dominica', 'dm', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(48, 'Dominican Republic', 'do', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(49, 'East Timor (Timor-Leste)', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(50, 'Ecuador', 'ec', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(51, 'Egypt', 'eg', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(52, 'El Salvador', 'sv', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(53, 'Equatorial Guinea', 'gq', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(54, 'Eritrea', 'er', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(55, 'Estonia', 'ee', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(56, 'Eswatini', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(57, 'Ethiopia', 'et', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(58, 'Fiji', 'fj', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(59, 'Finland', 'fi', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(60, 'France', 'fr', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(61, 'Gabon', 'ga', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(62, 'Gambia', 'gm', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(63, 'Georgia', 'ge', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(64, 'Germany', 'de', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(65, 'Ghana', 'gh', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(66, 'Greece', 'gr', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(67, 'Grenada', 'gd', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(68, 'Guatemala', 'gt', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(69, 'Guinea', 'gn', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(70, 'Guinea-Bissau', 'gw', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(71, 'Guyana', 'gy', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(72, 'Haiti', 'ht', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(73, 'Honduras', 'hn', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(74, 'Hungary', 'hu', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(75, 'Iceland', 'is', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(76, 'India', 'in', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(77, 'Indonesia', 'id', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(78, 'Iran', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(79, 'Iraq', 'iq', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(80, 'Ireland', 'ie', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(81, 'Israel', 'il', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(82, 'Italy', 'it', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(83, 'Ivory Coast', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(84, 'Jamaica', 'jm', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(85, 'Japan', 'jp', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(86, 'Jordan', 'jo', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(87, 'Kazakhstan', 'kz', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(88, 'Kenya', 'ke', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(89, 'Kiribati', 'ki', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(90, 'Korea, North', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(91, 'Korea, South', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(92, 'Kosovo', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(93, 'Kuwait', 'kw', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(94, 'Kyrgyzstan', 'kg', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(95, 'Laos', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(96, 'Latvia', 'lv', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(97, 'Lebanon', 'lb', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(98, 'Lesotho', 'ls', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(99, 'Liberia', 'lr', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(100, 'Libya', 'ly', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(101, 'Liechtenstein', 'li', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(102, 'Lithuania', 'lt', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(103, 'Luxembourg', 'lu', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(104, 'Madagascar', 'mg', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(105, 'Malawi', 'mw', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(106, 'Malaysia', 'my', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(107, 'Maldives', 'mv', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(108, 'Mali', 'ml', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(109, 'Malta', 'mt', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(110, 'Marshall Islands', 'mh', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(111, 'Mauritania', 'mr', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(112, 'Mauritius', 'mu', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(113, 'Mexico', 'mx', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(114, 'Micronesia', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(115, 'Moldova', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(116, 'Monaco', 'mc', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(117, 'Mongolia', 'mn', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(118, 'Montenegro', 'me', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(119, 'Morocco', 'ma', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(120, 'Mozambique', 'mz', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(121, 'Myanmar (Burma)', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(122, 'Namibia', 'na', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(123, 'Nauru', 'nr', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(124, 'Nepal', 'np', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(125, 'Netherlands', 'nl', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(126, 'New Zealand', 'nz', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(127, 'Nicaragua', 'ni', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(128, 'Niger', 'ne', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(129, 'Nigeria', 'ng', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(130, 'North Macedonia', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(131, 'Norway', 'no', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(132, 'Oman', 'om', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(133, 'Pakistan', 'pk', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(134, 'Palau', 'pw', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(135, 'Panama', 'pa', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(136, 'Papua New Guinea', 'pg', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(137, 'Paraguay', 'py', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(138, 'Peru', 'pe', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(139, 'Philippines', 'ph', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(140, 'Poland', 'pl', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(141, 'Portugal', 'pt', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(142, 'Qatar', 'qa', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(143, 'Romania', 'ro', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(144, 'Russia', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(145, 'Rwanda', 'rw', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(146, 'Saint Kitts and Nevis', 'kn', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(147, 'Saint Lucia', 'lc', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(148, 'Saint Vincent and the Grenadines', 'vc', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(149, 'Samoa', 'ws', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(150, 'San Marino', 'sm', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(151, 'Sao Tome and Principe', 'st', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(152, 'Saudi Arabia', 'sa', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(153, 'Senegal', 'sn', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(154, 'Serbia', 'rs', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(155, 'Seychelles', 'sc', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(156, 'Sierra Leone', 'sl', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(157, 'Singapore', 'sg', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(158, 'Slovakia', 'sk', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(159, 'Slovenia', 'si', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(160, 'Solomon Islands', 'sb', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(161, 'Somalia', 'so', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(162, 'South Africa', 'za', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(163, 'South Sudan', 'ss', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(164, 'Spain', 'es', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(165, 'Sri Lanka', 'lk', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(166, 'Sudan', 'sd', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(167, 'Suriname', 'sr', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(168, 'Sweden', 'se', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(169, 'Switzerland', 'ch', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(170, 'Syria', '', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(171, 'Taiwan', '', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(172, 'Tajikistan', 'tj', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(173, 'Tanzania', '', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(174, 'Thailand', 'th', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(175, 'Togo', 'tg', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(176, 'Tonga', 'to', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(177, 'Trinidad and Tobago', 'tt', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(178, 'Tunisia', 'tn', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(179, 'Turkey', 'tr', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(180, 'Turkmenistan', 'tm', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(181, 'Tuvalu', 'tv', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(182, 'Uganda', 'ug', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(183, 'Ukraine', 'ua', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(184, 'United Arab Emirates', 'ae', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(185, 'United Kingdom', '', 1, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(186, 'United States', '', 2, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(187, 'Uruguay', 'uy', 3, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(188, 'Uzbekistan', 'uz', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(189, 'Vanuatu', 'vu', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(190, 'Vatican City', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(191, 'Venezuela', '', 0, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(192, 'Vietnam', 'vn', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(193, 'Yemen', 'ye', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(194, 'Zambia', 'zm', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09'),
+(195, 'Zimbabwe', 'zw', 4, '2024-08-19 17:46:09', '2024-08-19 17:46:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `count_number`
+--
+
+CREATE TABLE `count_number` (
+  `Id` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `count` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `count_number`
+--
+
+INSERT INTO `count_number` (`Id`, `type`, `count`, `created_at`, `updated_at`) VALUES
+(1, 'estimate', 60, '2024-08-30 11:42:19', '2024-08-30 16:22:29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
   `Id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `client_name` varchar(100) NOT NULL,
-  `ntn_number` varchar(100) NOT NULL,
-  `contact_name` varchar(100) NOT NULL,
-  `contact_no` varchar(100) NOT NULL,
-  `contact_email` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `city` varchar(100) NOT NULL,
-  `zip_code` varchar(100) NOT NULL,
-  `country` varchar(100) NOT NULL,
-  `active` int(11) NOT NULL,
+  `customer_id` varchar(50) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `contact_name` varchar(255) DEFAULT NULL,
+  `phone_1` varchar(20) DEFAULT NULL,
+  `phone_2` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `mailing_address` text DEFAULT NULL,
+  `billing_address` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`Id`, `client_id`, `client_name`, `ntn_number`, `contact_name`, `contact_no`, `contact_email`, `phone`, `address`, `city`, `zip_code`, `country`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Updated Amazon', '', 'Amazon', '0000-0000000', 'username@gmail.com', '', 'Lahore', '', '', 'Pakistan', 1, '2023-10-12 04:23:14', '2023-10-12 04:23:14'),
-(2, 2, 'Digi Key', '', 'digikey', '0320-0000000', '', '', '', '', '', '', 1, '2023-10-12 04:24:08', '2023-10-12 04:24:08'),
-(3, 3, 'test vendor', '', 'john doe', '03224038389', '', '', '', '', '', '', 1, '2024-02-02 20:22:17', '2024-02-02 20:22:17'),
-(4, 4, 'New Client', '', 'John doe', '03221234567', 'email@email.com', '03224064098', 'Lahore', 'Lahore', '', 'Lahore, Pakistan', 1, '2024-02-04 19:46:49', '2024-02-04 19:46:49'),
-(5, 5, 'New client 2', '', 'John', '09874321478', 'junaid.khalil@gmail.com', '03224064098', 'Lahore', 'Lahore', '', 'Pakistan', 1, '2024-02-04 19:48:15', '2024-02-04 19:48:15');
+INSERT INTO `customers` (`Id`, `customer_id`, `company_name`, `contact_name`, `phone_1`, `phone_2`, `email`, `city`, `mailing_address`, `billing_address`, `notes`, `created_at`, `updated_at`) VALUES
+(2, 'CTR01', 'Test Company', 'Customer 1', '789644', '', 'test@gmail.com', 'lahore', 'h#33 good street', 'h#33 good street', 'this is a atest ', '2024-08-21 14:23:25', '2024-08-21 14:27:34'),
+(3, 'CTR02', 'Test Company2', 'Customer 22', '789644', '2323232', 'junaid.khalil@venturetronics.com', 'lahore', 'h#33 good street', 'h#33 good street', '23232332', '2024-08-21 14:26:08', '2024-08-21 14:32:48'),
+(5, 'CTR03', 'Test Company 3', 'Customer 3', '789644', '2323232', 'testagency1@gmail.com', 'lahore', 'h#33 good street', 'h#33 good street', 'AAAASAS', '2024-08-21 14:29:30', '2024-08-21 14:29:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `draft`
+-- Table structure for table `entities`
 --
 
-CREATE TABLE `draft` (
+CREATE TABLE `entities` (
   `Id` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `vendor_id` int(11) NOT NULL,
-  `payment_mode` varchar(30) NOT NULL,
-  `credit_terms` varchar(30) NOT NULL,
-  `tax` double NOT NULL,
-  `discount` double NOT NULL,
-  `delivery_charges` double NOT NULL,
-  `currency` int(11) NOT NULL,
-  `comment` varchar(3000) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `address` text NOT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `draft`
---
-
-INSERT INTO `draft` (`Id`, `type`, `username`, `client_id`, `vendor_id`, `payment_mode`, `credit_terms`, `tax`, `discount`, `delivery_charges`, `currency`, `comment`, `created_at`, `updated_at`) VALUES
-(28, 'purchase', 'junaid.khalil', 0, 0, '', 'per agreed terms', 0, 0, 0, 0, '', '2024-03-18 10:26:02', '2024-03-18 10:26:02');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `draft_items`
---
-
-CREATE TABLE `draft_items` (
-  `Id` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `product_id` varchar(50) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `specification` varchar(255) NOT NULL,
-  `qty` double NOT NULL,
-  `uom` varchar(20) NOT NULL,
-  `unit_price` double NOT NULL,
-  `additional_note` varchar(150) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `draft_items`
---
-
-INSERT INTO `draft_items` (`Id`, `type`, `username`, `product_id`, `description`, `specification`, `qty`, `uom`, `unit_price`, `additional_note`, `created_at`, `updated_at`) VALUES
-(3369, 'purchase', 'junaid.khalil', '', '', '', 0, '', 0, '', '2024-03-18 15:26:02', '2024-03-18 10:26:02'),
-(3378, 'purchase', 'junaid.khalil', '1693585433000-5225-4265', 'aluminum block', '400mm*35mm*85mm', 3, 'No.', 19794, '', '2024-03-18 15:26:45', '2024-03-18 10:26:45'),
-(3379, 'quotation', 'junaid.khalil', '1693833143000-5304-2717', 'can interface ic', '1/1 transceiver half canbus 8-soic', 5, 'No.', 0, '', '2024-08-13 17:35:54', '2024-08-13 12:35:54');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `invoices`
---
-
-CREATE TABLE `invoices` (
-  `Id` int(11) NOT NULL,
-  `invoice_no` int(11) NOT NULL,
-  `quotation_no` int(11) NOT NULL,
-  `po_no` varchar(50) NOT NULL,
-  `payment_mode` varchar(50) NOT NULL,
-  `credit_terms` varchar(50) NOT NULL,
-  `qty` double NOT NULL,
-  `tax` double NOT NULL,
-  `discount` double NOT NULL,
-  `delivery_charges` double NOT NULL,
-  `additional_charges` double NOT NULL,
-  `additional_charges_detail` varchar(100) NOT NULL,
-  `comment` varchar(500) NOT NULL,
-  `grand_total` double NOT NULL,
-  `status` int(11) NOT NULL,
-  `is_closed` int(11) NOT NULL,
-  `is_paid` int(11) NOT NULL,
-  `generated_by` varchar(50) NOT NULL,
-  `updated_by` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `invoices`
+-- Dumping data for table `entities`
 --
 
-INSERT INTO `invoices` (`Id`, `invoice_no`, `quotation_no`, `po_no`, `payment_mode`, `credit_terms`, `qty`, `tax`, `discount`, `delivery_charges`, `additional_charges`, `additional_charges_detail`, `comment`, `grand_total`, `status`, `is_closed`, `is_paid`, `generated_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(2, 1001, 1002, '20240303-01', 'cash', 'per agreed terms', 0, 5000, 1000, 1200, 0, '', '&#34This is the first line&#34\r\nThis is the &#39SECOND&#39 line.\r\nThis is the third line. Updated', 55800, 1, 0, 0, 'junaid.khalil', 'junaid.khalil', '2024-03-04 19:48:04', '2024-03-08 20:04:35'),
-(3, 1002, 1006, '123456-7890', 'Wire Transfer/TT', 'Net 15', 0, 1000, 500, 800, 0, '', 'Test note has been added', 89300, 1, 0, 0, 'junaid.khalil', 'junaid.khalil', '2024-03-08 20:05:26', '2024-03-14 15:02:44'),
-(4, 1003, 1007, '', 'Wire Transfer/TT', 'Net 15', 0, 1000, 1000, 100, 0, '', '', 88100, 1, 0, 0, 'junaid.khalil', 'junaid.khalil', '2024-03-14 13:55:05', '2024-03-14 13:55:05'),
-(5, 1004, 1002, '', 'cheque', 'Net 30', 0, 500, 800, 1200, 0, '', '', 47564, 1, 1, 0, 'junaid.khalil', 'junaid.khalil', '2024-03-20 14:59:20', '2024-03-20 14:59:20'),
-(6, 1005, 1009, '', 'cheque', 'per agreed terms', 0, 0, 0, 0, 0, '', '', 106600, 1, 0, 0, 'junaid.khalil', 'junaid.khalil', '2024-03-20 14:59:29', '2024-03-20 14:59:29');
+INSERT INTO `entities` (`Id`, `country_id`, `city_id`, `address`, `website`, `phone_number`, `created_at`, `updated_at`) VALUES
+(2, 133, 1, 'Pak Lahore', 'www.testentity.com', '7844545454', '2024-08-21 13:35:10', '2024-08-21 13:35:10'),
+(3, 76, 2, 'test is the test of each fields', 'www.testentity.com', '7844545454', '2024-08-22 10:09:15', '2024-08-22 10:09:15');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoice_items`
+-- Table structure for table `entity`
 --
 
-CREATE TABLE `invoice_items` (
+CREATE TABLE `entity` (
   `Id` int(11) NOT NULL,
-  `invoice_no` int(11) NOT NULL,
-  `product_id` varchar(100) NOT NULL,
-  `qty` double NOT NULL,
-  `uom` varchar(20) NOT NULL,
-  `unit_price` double NOT NULL,
-  `line_total` double NOT NULL,
-  `additional_note` varchar(100) NOT NULL,
-  `status` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `address` text NOT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `invoice_items`
---
-
-INSERT INTO `invoice_items` (`Id`, `invoice_no`, `product_id`, `qty`, `uom`, `unit_price`, `line_total`, `additional_note`, `status`, `created_at`, `updated_at`) VALUES
-(6, 1001, '1693243951000-4877-1538', 50, 'Pcs.', 120, 6000, 'test updated', 1, '2024-03-04 19:48:04', '2024-03-04 19:48:04'),
-(7, 1001, '1693243951000-4877-1538', 32, 'Pcs.', 2900, 92800, 'test', 0, '2024-03-04 19:48:04', '2024-03-04 19:48:04'),
-(8, 1001, '1693243939000-8865-8098', 4, 'Pcs.', 6500, 26000, 'test 2 updated', 1, '2024-03-04 19:48:04', '2024-03-04 19:48:04'),
-(9, 1001, '1693926209000-9402-9366', 6, 'No.', 1200, 7200, '', 1, '2024-03-04 19:48:04', '2024-03-04 19:48:04'),
-(10, 1001, '1693833143000-5304-2717', 4, 'No.', 2850, 11400, 'Updated comment', 1, '2024-03-04 19:48:04', '2024-03-04 19:48:04'),
-(11, 1002, '1694610590000-3748-2404', 12, 'Pcs.', 1200, 14400, 'test', 0, '2024-03-08 20:05:26', '2024-03-08 20:05:26'),
-(12, 1002, '1693398123000-5375-4707', 40, 'No.', 2200, 88000, '', 1, '2024-03-08 20:05:26', '2024-03-08 20:05:26'),
-(13, 1003, '1693398123000-5375-4707', 40, 'No.', 2200, 88000, '', 1, '2024-03-14 13:55:05', '2024-03-14 13:55:05'),
-(14, 1004, '1693243951000-4877-1538', 72, 'Pcs.', 112, 8064, '', 1, '2024-03-20 14:59:20', '2024-03-20 14:59:20'),
-(15, 1004, '1693243951000-4877-1538', 60, 'Pcs.', 290, 17400, 'test', 1, '2024-03-20 14:59:20', '2024-03-20 14:59:20'),
-(16, 1004, '1693243939000-8865-8098', 4, 'Pcs.', 650, 2600, 'test 2', 1, '2024-03-20 14:59:20', '2024-03-20 14:59:20'),
-(17, 1004, '1693926209000-9402-9366', 6, 'Pcs.', 1200, 7200, '', 1, '2024-03-20 14:59:20', '2024-03-20 14:59:20'),
-(18, 1004, '1693833143000-5304-2717', 4, 'No.', 2850, 11400, 'fggndyuj6y', 1, '2024-03-20 14:59:20', '2024-03-20 14:59:20'),
-(19, 1005, '1694167272000-1905-9647', 1, 'No.', 52600, 52600, '', 1, '2024-03-20 14:59:29', '2024-03-20 14:59:29'),
-(20, 1005, '1693229389000-1513-4178', 12, 'Box', 4500, 54000, '', 1, '2024-03-20 14:59:29', '2024-03-20 14:59:29');
 
 -- --------------------------------------------------------
 
@@ -318,6 +473,84 @@ INSERT INTO `permissions` (`Id`, `user_email`, `user_role`, `user_permission`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rates`
+--
+
+CREATE TABLE `rates` (
+  `Id` int(11) NOT NULL,
+  `region_id` int(11) NOT NULL,
+  `tgs_sla_zone` varchar(10) NOT NULL,
+  `tbs_priority` varchar(10) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `duty_tax` double NOT NULL,
+  `customs_brokerage` double NOT NULL,
+  `handling` double NOT NULL,
+  `ior` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rates`
+--
+
+INSERT INTO `rates` (`Id`, `region_id`, `tgs_sla_zone`, `tbs_priority`, `country_id`, `duty_tax`, `customs_brokerage`, `handling`, `ior`, `created_at`, `updated_at`) VALUES
+(2, 4, '1', '1', 133, 76, 450, 0, 500, '2024-08-21 16:57:00', '2024-08-23 12:54:14'),
+(3, 1, '1', '1', 59, 5, 600, 300, 800, '2024-08-22 13:22:14', '2024-08-22 13:22:14'),
+(4, 1, '1', '1', 80, 0, 0, 300, 0, '2024-08-23 11:39:09', '2024-08-23 12:06:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `regions`
+--
+
+CREATE TABLE `regions` (
+  `Id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `regions`
+--
+
+INSERT INTO `regions` (`Id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'EMEA Europe the Middle East and Africa ', '2024-08-19 17:16:51', '2024-08-20 18:37:08'),
+(2, 'NA North America ', '2024-08-19 17:17:21', '2024-08-20 18:37:15'),
+(3, 'LATAM (Latin America)', '2024-08-19 17:17:45', '2024-08-19 17:17:45'),
+(4, 'APAC (Asia-Pacific)', '2024-08-19 17:17:45', '2024-08-19 17:17:45'),
+(10, 'Test Region', '2024-08-21 13:17:40', '2024-08-21 13:17:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `Id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `val` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`Id`, `name`, `val`, `created_at`, `updated_at`) VALUES
+(1, 'default_ior', '500', '2024-08-22 15:36:02', '2024-08-22 15:36:02'),
+(2, 'default_duty_tax', '10', '2024-08-22 15:36:02', '2024-08-22 15:36:02'),
+(3, 'default_handling_charges', '400', '2024-08-22 15:36:02', '2024-08-23 14:40:39'),
+(4, 'default_customs_brokerage', '450', '2024-08-22 15:36:02', '2024-08-23 14:40:39'),
+(6, 'admin_bank_charges', '250', '2024-08-23 13:53:50', '2024-08-23 13:54:02');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -339,7 +572,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `display_name`, `user_name`, `email`, `password`, `user_role`, `status`, `assign_to`, `created_at`, `updated_at`) VALUES
-(1, 'Muhammad Junaid Khalil', 'junaid.khalil', 'junaid.khalil@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', NULL, 0, '2021-07-07 18:52:49', '2021-07-07 18:52:49');
+(1, 'Muhammad Junaid Khalil', 'junaid.khalil', 'junaid.khalil@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', NULL, 0, '2021-07-07 18:52:49', '2021-07-07 18:52:49'),
+(73, 'Ali Abbas', 'ali.abbas', 'ali.abbas@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', NULL, 0, '2021-07-07 18:52:49', '2021-07-07 18:52:49');
 
 -- --------------------------------------------------------
 
@@ -403,6 +637,13 @@ INSERT INTO `user_meta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES
 --
 
 --
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `country_id` (`country_id`);
+
+--
 -- Indexes for table `companies`
 --
 ALTER TABLE `companies`
@@ -421,41 +662,61 @@ ALTER TABLE `counter`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `count_number`
+--
+ALTER TABLE `count_number`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `draft`
+-- Indexes for table `entities`
 --
-ALTER TABLE `draft`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `draft_items`
---
-ALTER TABLE `draft_items`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `invoices`
---
-ALTER TABLE `invoices`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `invoice_items`
---
-ALTER TABLE `invoice_items`
+ALTER TABLE `entities`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `quotation_no` (`invoice_no`);
+  ADD KEY `country_id` (`country_id`);
+
+--
+-- Indexes for table `entity`
+--
+ALTER TABLE `entity`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `country_id` (`country_id`);
 
 --
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `rates`
+--
+ALTER TABLE `rates`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `region_id` (`region_id`),
+  ADD KEY `country_id` (`country_id`);
+
+--
+-- Indexes for table `regions`
+--
+ALTER TABLE `regions`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -473,6 +734,12 @@ ALTER TABLE `user_meta`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -493,34 +760,34 @@ ALTER TABLE `counter`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+
+--
+-- AUTO_INCREMENT for table `count_number`
+--
+ALTER TABLE `count_number`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `draft`
+-- AUTO_INCREMENT for table `entities`
 --
-ALTER TABLE `draft`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+ALTER TABLE `entities`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `draft_items`
+-- AUTO_INCREMENT for table `entity`
 --
-ALTER TABLE `draft_items`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3380;
-
---
--- AUTO_INCREMENT for table `invoices`
---
-ALTER TABLE `invoices`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `invoice_items`
---
-ALTER TABLE `invoice_items`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `entity`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -529,16 +796,63 @@ ALTER TABLE `permissions`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
+-- AUTO_INCREMENT for table `rates`
+--
+ALTER TABLE `rates`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `regions`
+--
+ALTER TABLE `regions`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `user_meta`
 --
 ALTER TABLE `user_meta`
   MODIFY `umeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cities`
+--
+ALTER TABLE `cities`
+  ADD CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`Id`);
+
+--
+-- Constraints for table `entities`
+--
+ALTER TABLE `entities`
+  ADD CONSTRAINT `entities_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`Id`);
+
+--
+-- Constraints for table `entity`
+--
+ALTER TABLE `entity`
+  ADD CONSTRAINT `entity_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`Id`);
+
+--
+-- Constraints for table `rates`
+--
+ALTER TABLE `rates`
+  ADD CONSTRAINT `rates_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `regions` (`Id`),
+  ADD CONSTRAINT `rates_ibfk_2` FOREIGN KEY (`country_id`) REFERENCES `countries` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

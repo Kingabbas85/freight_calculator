@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimate</title>
+    <!-- Bootstrap 3.5 CSS CDN -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/material-bootstrap-wizard.css" rel="stylesheet" />
+    <style>
+        .header-bg {
+            background-color: #d9534f;
+            color: #fff;
+            padding: 20px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .section-title {
+            color: #5cb85c;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .note-bg {
+            background-color: #d9534f;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .total-bg {
+            background-color: #d9534f;
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .table-bordered > tbody > tr > td {
+            border: 1px solid #ddd;
+        }
+
+        .table > thead > tr > th {
+            background-color: #d9534f;
+            color: #fff;
+            border: 1px solid #d9534f;
+        }
+
+        .bordered-div {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="background-color: #f7f7f7; padding: 50px 0;">
+        <div class="container" style="background-color: #fff; padding: 0; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <div class="header-bg text-center">
+                <div class="row">
+                    <div class="col-xs-6 text-left">
+                        <h2><strong>ESTIMATE</strong></h2>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <h4><strong>ESTIMATE#:</strong> UT60006</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" style="padding: 30px;">
+                <div class="row bordered-div">
+                    <div class="col-sm-6">
+                        <p class="section-title">UAE ENTITY</p>
+                        <p>UAE street address</p>
+                        <p>City, UAE</p>
+                        <p>Website: <a href="#">www.UAEentity.com</a></p>
+                        <p>Phone: 00000 00 000 0000</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="section-title">CUSTOMER</p>
+                        <p>Customer-2</p>
+                        <p>373 Downing St, Georgia, 30045</p>
+                        <p>Lawrenceville</p>
+                        <p>United States</p>
+                    </div>
+                </div>
+
+                <div class="row bordered-div text-center">
+                    <div class="col-xs-2">
+                        <p><strong>DATE</strong></p>
+                        <p>26-08-24</p>
+                    </div>
+                    <div class="col-xs-2">
+                        <p><strong>HARGEBLE WEIGHT</strong></p>
+                        <p>18.1kg</p>
+                    </div>
+                    <div class="col-xs-2">
+                        <p><strong>CARGO VALUE</strong></p>
+                        <p>USD 1,980.00</p>
+                    </div>
+                    <div class="col-xs-3">
+                        <p><strong>SHIP FROM</strong></p>
+                        <p>United States</p>
+                    </div>
+                    <div class="col-xs-3">
+                        <p><strong>SHIP TO</strong></p>
+                        <p>Vietnam</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-6">DESCRIPTION</th>
+                                    <th class="col-xs-3 text-center">TAXED</th>
+                                    <th class="col-xs-3 text-right">AMOUNT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IOR</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">500.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Estimated Duty & Taxes</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">435.60</td>
+                                </tr>
+                                <tr>
+                                    <td>Estimated VAT (20% of CIP cost + Duties )</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">435.60</td>
+                                </tr>
+                                <tr>
+                                    <td>Customs Brokerage</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">450.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Handling Charges</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">400.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Admin & Bank Charges</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">250.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance & Certification</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">750.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Storage</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">250.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Mile Delivery</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-right">350.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="note-bg">NOTE</div>
+                        <ol class="footer-note">
+                            <li>The content of this document is proprietary, confidential, and intended solely for the recipient.</li>
+                            <li>No part of this document may be disclosed, reproduced, or forwarded to anyone without the written authorization of Company Name.</li>
+                        </ol>
+                        <p><strong>Customer Acceptance (Sign below)</strong></p>
+                        <div style="border-top: 1px solid #ddd; margin-top: 40px; padding-top: 10px;">
+                            <p>Print Name:</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal:</td>
+                                    <td class="text-right"><strong>3,385.60</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Taxable:</td>
+                                    <td class="text-right"><strong>-</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Tax rate:</td>
+                                    <td class="text-right"><strong>6.250%</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Tax due:</td>
+                                    <td class="text-right"><strong>-</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Other:</td>
+                                    <td class="text-right"><strong>-</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="total-bg">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    TOTAL:
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    USD 3,385.60
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 3.5 JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.5.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
