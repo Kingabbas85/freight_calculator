@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	var path = window.location.pathname;
 	var path = path.toLowerCase();
-	var id = path.replace("/freight_calculator/", "");
+	var id = path.replace("/", "");
 	// active sidebar
 	$(".side-bar .sidebar-items a#"+id).addClass("active");
 
