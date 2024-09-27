@@ -107,6 +107,52 @@ if (isset($_POST['importCountriesFromExcel']) && $_POST["importCountriesFromExce
     // $zk->disconnect();
     echo json_encode(['status' => 'success', 'message' => 'Country Imported successfully']);
 }
+
+
+/* -------------------------------------------------------------------------- */
+/*                     // Import Rates                                    */
+/* -------------------------------------------------------------------------- */
+
+if (isset($_POST['importRatesFromExcel'])) {
+    // Load the Excel file
+    $spreadsheet = PHPExcel_IOFactory::load('assets/rates/rates.xlsx');
+    // Get the first sheet
+    $sheet = $spreadsheet->getActiveSheet();
+    $highestRow = $sheet->getHighestRow();
+    $highestColumn = $sheet->getHighestColumn();
+    
+    // Loop through each row of the spreadsheet
+    for ($row = 2; $row <= $highestRow; $row++) {
+        $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+        
+        // Map data to your database columns
+        $regionID = $rowData[0][0]; // Assuming the first column is region_id
+        $tgsSlaZone = $rowData[0][1]; // Assuming the second column is tgs_sla_zone
+        $tbsPriority = $rowData[0][2]; // Assuming the third column is tbs_priority
+        $countryID = $rowData[0][3]; // Assuming the fourth column is country_id
+        $dutyTax = $rowData[0][4]; // Assuming the fifth column is duty_tax
+        $customsBrokerage = $rowData[0][5]; // Assuming the sixth column is customs_brokerage
+        $handling = $rowData[0][6]; // Assuming the seventh column is handling
+        $ior = $rowData[0][7]; // Assuming the eighth column is ior
+
+        // Insert data into the `rates` table
+        $query = "
+            INSERT INTO rates (region_id, tgs_sla_zone, tbs_priority, country_id, duty_tax, customs_brokerage, handling, ior)
+            VALUES ('$regionID', '$tgsSlaZone', '$tbsPriority', '$countryID', '$dutyTax', '$customsBrokerage', '$handling', '$ior')";
+        
+        $result = mysqli_query($connection, $query);
+        
+        if (!$result) {
+            // Handle query failure (e.g., log the error)
+            echo json_encode(['status' => 'error', 'message' => 'Error importing data: ' . mysqli_error($connection)]);
+            exit;
+        }
+    }
+
+    echo json_encode(['status' => 'success', 'message' => 'Rates imported successfully']);
+}
+
+
         // $users = $zk->deviceName(); // Assuming getUser() pulls all users
         // $finger_user = $zk->getFingerprint(2); // Assuming getUser() pulls all users
         // $attendace = $zk->getAttendance(); // Assuming getUser() pulls all users

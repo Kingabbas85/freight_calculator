@@ -1,10 +1,10 @@
 
 // Define domain name
-var Domain = (window.location.protocol+'//'+window.location.host+"/");
+var Domain = (window.location.protocol+'//'+window.location.host+"/freight_calculator");
 var DomainName = ("/");
 
 // if ((window.location.protocol+'//'+window.location.host) == "http://vt-inven.venturetronics.com") {
-//     window.location.href = "http://203.130.21.178/freight_calculator";
+//     window.location.href = "http://localhost/freight_calculator";
 // }
 // var path = window.location.pathname;
 // var path = path.toLowerCase();

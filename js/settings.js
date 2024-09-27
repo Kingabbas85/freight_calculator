@@ -120,6 +120,45 @@ $(document).ready(function () {
 		})
 	})
 
+	/* -------------------------------------------------------------------------- */
+	/*                            Import Countries In Database & Device From Excel                     */
+	/* -------------------------------------------------------------------------- */
+	$("#importRatesFromExcel").click(function () {
+		swal({
+			title: "Import Rates",
+			text: "Are you sure to import data",
+			icon: "info",
+			buttons: ["No", "Yes"],
+		}).then((result) => {
+			if (result) {
+				$(".loader-div").show() // show loader
+				$.ajax({
+					url: Domain + "/ajaxcallforsettings.php",
+					method: "POST",
+					dataType: "json",
+					data: {
+						importRatesFromExcel: 1,
+					},
+					success: function (response) {
+						$(".loader-div").hide() // hide loader
+						if (response.status === "success") {
+							$(".success-alert-text").text(response.message)
+							$(".success-alert").css("display", "flex")
+							fadeOutAlertMessage()
+						} else {
+							$(".error-alert-text").text(response.message)
+							$(".error-alert").css("display", "flex")
+							fadeOutAlertMessage()
+						}
+					},
+					error: function () {
+						alert("An error occurred during the export process.")
+					},
+				})
+			}
+		})
+	})
+
 	// function checkAttendance() {
 	//     $.ajax({
 	//         url: 'ajaxcallformarkattendance.php',

@@ -118,6 +118,12 @@ if ($_SESSION['user_email'] == true) {
 									<button type="button" id="importCountriesFromExcel" class="btn btn-sm btn-outline-success">Import Countries </button>
 								</td>
 							</tr>
+							<tr class="text-left">
+								<td> Import Rates In Database From Excel</td>
+								<td>
+									<button type="button" id="importRatesFromExcel" class="btn btn-sm btn-outline-success">Import Rates </button>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

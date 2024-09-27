@@ -81,7 +81,7 @@ $countries = [
  * @return [string] [complete root path of a file]
  */
 function Domain($url) {
-	return $_SERVER['DOCUMENT_ROOT'] . '/hrms/' . $url;
+	return $_SERVER['DOCUMENT_ROOT'] . '/freight_calculator/' . $url;
 }
 /**
  * [imsSendEmail sends Emails to users]
@@ -1332,16 +1332,44 @@ function getCityNameById($connection, $city_id)
 }
 
 
+// function getEntityNameByCountryId($connection, $country_id)
+// {
+//     $country_name = "";
+//     $query = "SELECT * FROM countries WHERE Id = '$country_id'";
+//     $result = mysqli_query($connection, $query);
+    
+//     if (mysqli_num_rows($result)) {
+//         while ($row = mysqli_fetch_assoc($result)) {
+//             // Get the first three letters of the country name
+//             $country_name = strtoupper(substr($row['name'], 0, 3)) . " ENTITY";
+//         }
+//     }
+    
+//     return $country_name;
+// }
+
 function getEntityNameByCountryId($connection, $country_id)
 {
     $country_name = "";
-    $query = "SELECT * FROM countries WHERE Id = '$country_id'";
+    $query = "SELECT name FROM countries WHERE Id = '$country_id'";
     $result = mysqli_query($connection, $query);
     
     if (mysqli_num_rows($result)) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            // Get the first three letters of the country name
-            $country_name = strtoupper(substr($row['name'], 0, 3)) . " ENTITY";
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+
+        // Check if the country name contains multiple words
+        $name_parts = explode(" ", $name);
+        if (count($name_parts) > 1) {
+            // Get the first letter of each word to form an acronym
+            $acronym = "";
+            foreach ($name_parts as $part) {
+                $acronym .= strtoupper($part[0]);
+            }
+            $country_name = $acronym . " ENTITY";
+        } else {
+            // Single word: take the first 3 letters
+            $country_name = strtoupper(substr($name, 0, 3)) . " ENTITY";
         }
     }
     

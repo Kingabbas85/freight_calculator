@@ -169,7 +169,7 @@ $(document).ready(function () {
 		var ship_to = $(this).val()
 		console.log(ship_to)
 		$.ajax({
-			url: Domain + "/ajaxcallforcalculation.php",
+			url: Domain + "ajaxcallforcalculation.php",
 			method: "POST",
 			data: {
 				getDutyTaxes: 1,

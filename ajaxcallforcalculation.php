@@ -13,7 +13,7 @@
         $admin_bank_charges = getDefaultValuesByName($connection,'admin_bank_charges');
 
         $ship_to = $_POST["ship_to"];
-        $query = "SELECT * FROM rates WHERE Id = '$ship_to'";
+        $query = "SELECT * FROM rates WHERE country_id = '$ship_to'";
         $result = mysqli_query($connection, $query);
         if ($result) {
             $row = mysqli_fetch_array($result);
