@@ -164,55 +164,7 @@ $(document).ready(function () {
 
 	$(".set-full-height").css("height", "auto")
 
-	/* -------------------------------------------------------------------------- */
-	/*                               // custom code                               */
-	/* -------------------------------------------------------------------------- */
-
-	// Function to update buttons in the rows
-	function updateButtons() {
-		$(".package-row").each(function (index) {
-			$(this).find(".add_row, .delete-row").remove() // Remove any existing buttons
-
-			if (index === 0) {
-				// First row: show "Add new row" button
-				$(this)
-					.find(".col-md-12.text-right")
-					.append(
-						'<button class="add_row btn-sm btn btn-danger" type="button">Add new row</button>'
-					)
-			} else {
-				// Subsequent rows: show "Delete row" button
-				$(this)
-					.find(".col-md-12.text-right")
-					.append(
-						'<button class="delete-row btn-sm btn btn-danger" type="button">Delete row</button>'
-					)
-			}
-		})
-	}
-
-	// Add new row
-	$(document).on("click", ".add_row", function () {
-		var newRow = $(".package-row:first").clone() // Clone the first row
-		newRow.find("input").val("") // Clear the inputs in the new row
-		$("#package-section").append(newRow) // Append the new row
-		newRow.append('<div class="col-md-12"><hr></div>') // Add HR line after the new row
-		updateButtons() // Update buttons after adding a new row
-		Calculate()
-		calculateGrandTotal()
-	})
-
-	// Delete row
-	$(document).on("click", ".delete-row", function () {
-		$(this).closest(".package-row").remove()
-		updateButtons() // Recalculate and update buttons after deletion
-		Calculate()
-		calculateGrandTotal()
-	})
-
-	// Initial call to update buttons on page load
-	updateButtons()
-
+	// custom code
 	$("#shipping_details #ship_to").change(function () {
 		var ship_to = $(this).val()
 		console.log(ship_to)
@@ -298,28 +250,9 @@ $(document).ready(function () {
 		// }
 
 		// Handling charges
-		// var package_gross_weight = parseFloat($("#package_gross_weight").val());
-		// var volumetric_weight = parseFloat($("#volumetric_weight").val())
-
-		var package_gross_weight = 0;
-		$(".package_gross_weight").map(function(){
-			package_gross_weight += $(this).val()*1;
-		});
-		package_gross_weight = parseFloat(package_gross_weight);
-		$(".total_package_gross_weight").val(package_gross_weight);
-		// console.log('package_gross_weight = '+package_gross_weight);
-
-		var volumetric_weight = 0;
-		$(".volumetric_weight").map(function(){
-			volumetric_weight += $(this).val()*1;
-		});
-		volumetric_weight = parseFloat(volumetric_weight);
-		$(".total_volumetric_weight").val(volumetric_weight);
-
-		// console.log('volumetric_weight = '+volumetric_weight);
-
-
-		// console.log(package_gross_weight, volumetric_weight)
+		var package_gross_weight = parseFloat($("#package_gross_weight").val())
+		var volumetric_weight = parseFloat($("#volumetric_weight").val())
+		console.log(package_gross_weight, volumetric_weight)
 		// Calculate the three values
 		if (volumetric_weight && package_gross_weight) {
 			var flat_fee = handling
@@ -376,14 +309,12 @@ $(document).ready(function () {
 		calculateEstimatedVAT()
 	})
 
-	$(".package_gross_weight").keyup(function () {
+	$("#package_gross_weight").keyup(function () {
 		Calculate()
 		calculateGrandTotal()
 	})
 
-	/* -------------------------------------------------------------------------- */
-	/*                       //////////////////For last mile                      */
-	/* -------------------------------------------------------------------------- */
+	//////////////////For last time
 	//setup before functions
 	var typingTimer //timer identifier
 	var doneTypingInterval = 1500 //time in ms, 5 seconds for example
@@ -405,44 +336,38 @@ $(document).ready(function () {
 		Calculate()
 		calculateGrandTotal()
 	}
-	/* -------------------------------------------------------------------------- */
-	/*                       //////////////////End For last mile                      */
-	/* -------------------------------------------------------------------------- */
+	//////////////////For last time
 
-	$("#package-section").delegate(".length, .width, .height, .package_quantity", "keyup", function() {
-		var tr = $(this).closest(".package-row");
-		// console.log(tr);
-		var length = tr.find(".length").val() * 1;
-		var width = tr.find(".width").val() * 1;
-		var height = tr.find(".height").val() * 1;
-		var package_quantity = tr.find(".package_quantity").val() * 1;
-		// console.log(length * width * height);
+	$("#length, #width, #height").keyup(function () {
+		// Get the values from the length, width, and height fields
+		var length = $("#length").val() * 1
+		var width = $("#width").val() * 1
+		var height = $("#height").val() * 1
+
 		// Calculate the package dimension (volume)
-		var packageDimension = length * width * height * package_quantity;
+		var packageDimension = length * width * height
 
 		// Set the package dimension value in the disabled input
-		tr.find(".package_dimension").val(packageDimension.toFixed(2));
+		$("#package_dimension").val(packageDimension.toFixed(2))
 
 		// Calculate the volumetric weight (package dimension divided by 5000)
-		var volumetricWeight = packageDimension / 5000;
+		var volumetricWeight = packageDimension / 5000
 
 		// Set the volumetric weight value in the disabled input
-		tr.find(".volumetric_weight").val(volumetricWeight.toFixed(2));
-
-
-		if (length || width || height || package_quantity) {
-			tr.find(".package_dimension_label_class").removeClass("is-empty");
-			tr.find(".volumetric_weight_label_class").removeClass("is-empty");
+		$("#volumetric_weight").val(volumetricWeight.toFixed(2))
+		if (length || width || height) {
+			$(".package_dimension_label_class").removeClass("is-empty")
+			$(".volumetric_weight_label_class").removeClass("is-empty")
 		}
-		if (length == "" && width == "" && height == ""  && package_quantity == "") {
-			tr.find(".package_dimension").val("");
-			tr.find(".volumetric_weight").val("");
-			tr.find(".package_dimension_label_class").addClass("is-empty");
-			tr.find(".volumetric_weight_label_class").addClass("is-empty");
+		if (length == "" && width == "" && height == "") {
+			$("#package_dimension").val("")
+			$("#volumetric_weight").val("")
+			$(".package_dimension_label_class").addClass("is-empty")
+			$(".volumetric_weight_label_class").addClass("is-empty")
 		}
 
-		Calculate();
-		calculateGrandTotal();
+		Calculate()
+		calculateGrandTotal()
 
 		// // Calculate the handling charges or any other values here
 		// var handlingValue = volumetricWeight * /* your rate or calculation here */;
@@ -452,7 +377,7 @@ $(document).ready(function () {
 	})
 
 	$(
-		"#ior, #duty_tax, #freight, #estimated_vat, #customs_brokerage, #import_permit_approval, #handling_charges, #admin_bank_charges, #compliance_certification, #storage, #last_mile_delivery, #custom_field_value"
+		"#ior, #duty_tax, #freight, #estimated_vat, #customs_brokerage, #import_permit_approval, #handling_charges, #admin_bank_charges, #compliance_certification, #storage, #last_mile_delivery"
 	).on("input", calculateGrandTotal)
 	function calculateGrandTotal() {
 		// Initialize total
@@ -470,7 +395,6 @@ $(document).ready(function () {
 		total += parseFloat($("#compliance_certification").val()) || 0
 		total += parseFloat($("#storage").val()) || 0
 		total += parseFloat($("#last_mile_delivery").val()) || 0
-		total += parseFloat($("#custom_field_value").val()) || 0
 
 		// Update the grand_total field
 		$("#grand_total").val(total.toFixed(2))

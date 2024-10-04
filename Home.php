@@ -47,7 +47,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
         }
 
         .header-bg {
-            background-color: #d9534f;
+            background-color: #001B69;
             color: #fff;
             padding: 5px;
             border-top-left-radius: 6px;
@@ -55,14 +55,17 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
         }
 
         .section-title {
-            color: #5cb85c;
+            padding: 5px 0px 05px 10px;
+            background-color: #15253F;
+            border-radius: 2px;
+            color: #fff;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 17px;
             margin-bottom: 10px;
         }
 
         .note-bg {
-            background-color: #d9534f;
+            background-color: #15253F;
             color: #fff;
             padding: 10px;
             border-radius: 4px;
@@ -71,7 +74,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
         }
 
         .total-bg {
-            background-color: #d9534f;
+            background-color: #001B69;
             color: #fff;
             padding: 15px;
             border-radius: 4px;
@@ -85,19 +88,20 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
         }
 
         .table>thead>tr>th {
-            background-color: #d9534f;
+            background-color: #15253F;
             color: #fff;
-            border: 1px solid #d9534f;
+            border: 1px solid #A6A6A6;
         }
 
         .bordered-div {
+
             border: 1px solid #ddd;
             padding: 15px;
             border-radius: 4px;
             margin-bottom: 20px;
         }
 
-        .bordered-right{
+        .bordered-right {
             border-right: 1px solid #ddd;
             /* padding: 15px; */
 
@@ -105,9 +109,38 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
 
         .footer-note {
             margin-top: 30px;
+            background-color: #f0f0f0;
         }
-        #hidden_download{
+
+        .top_table {
+            background-color: #f0f0f0;
+        }
+
+        #hidden_download {
             display: none;
+        }
+
+        .empty-row td {
+            padding: 10px;
+            /* Adjust the padding as needed */
+            height: 40px;
+            /* Optional: set a fixed height for empty rows if desired */
+        }
+
+        .disclaimer-section {
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .disclaimer-bg {
+            background-color: #C9082A;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -256,7 +289,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating dusty_tax_label_class">
                                                         <label class="control-label">Estimated Duty & Taxes</label>
-                                                        <input name="duty_tax" id="duty_tax" type="text" class="form-control" rel="tooltip" title="Auto Calculated based on Cargo value and charges based on government regulations defined in sheet named 'Countries & Rates'" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="duty_tax" id="duty_tax" type="text" class="form-control" rel="tooltip" title="Auto Calculated based on Cargo value and charges based on government regulations defined in sheet named 'Countries & Rates'" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,7 +300,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating ior_label_class">
                                                         <label class="control-label"> Importer of Records </label>
-                                                        <input name="ior" id="ior" type="text" class="form-control ior" disabled readonly rel="tooltip" title="Auto Calculated Fixed fee, applied as USD 600 or 5% of cargo value, whichever is higher" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="ior" id="ior" type="text" class="form-control ior" disabled readonly rel="tooltip" title="Auto Calculated Fixed fee, applied as USD 600 or 5% of cargo value, whichever is higher" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -275,7 +308,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating estimated_vat_label_class">
                                                         <label class="control-label">Estimated VAT (20% of CIP cost + Duties )</label>
-                                                        <input name="estimated_vat" id="estimated_vat" type="text" class="form-control" rel="tooltip" title="Auto Calculated based on Cargo value 20% of CIP cost + Duties" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="estimated_vat" id="estimated_vat" type="text" class="form-control" rel="tooltip" title="Auto Calculated based on Cargo value 20% of CIP cost + Duties" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
 
@@ -286,7 +319,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Freight</label>
-                                                        <input name="freight" type="text" class="form-control freight" id="freight" rel="tooltip" title="Determined by cargo and destination country" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="freight" type="text" class="form-control freight" id="freight" rel="tooltip" title="Determined by cargo and destination country" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -294,7 +327,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Import Permit/Approval</label>
-                                                        <input name="import_permit_approval" type="text" class="form-control import_permit_approval" id="import_permit_approval" rel="tooltip" title="Dependent on certification/approval required" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="import_permit_approval" type="text" class="form-control import_permit_approval" id="import_permit_approval" rel="tooltip" title="Dependent on certification/approval required" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -305,7 +338,27 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating customs_brokerage_label">
                                                         <label class="control-label">Customs Brokerage</label>
-                                                        <input name="customs_brokerage" type="text" class="form-control customs_brokerage" disabled readonly id="customs_brokerage" rel="tooltip" title="Fixed Fee" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="customs_brokerage" type="text" class="form-control customs_brokerage" disabled readonly id="customs_brokerage" rel="tooltip" title="Fixed Fee" oninput="<?php echo $onlyNumeric; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating custom_field_name_label">
+                                                        <label class="control-label">Custom Field Name</label>
+                                                        <input name="custom_field_name" type="text" class="form-control custom_field_name" id="custom_field_name" rel="tooltip" title="Add Custom Field Name" oninput="<?php echo $aplhaNumeric; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                    </span>
+                                                    <div class="form-group label-floating custom_field_value_label">
+                                                        <label class="control-label">Custom Field Value</label>
+                                                        <input name="custom_field_value" type="text" class="form-control custom_field_value" id="custom_field_value" rel="tooltip" title="Add Custom Field Value" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,66 +378,69 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                         </div>
                                                         <div id="collapseOne" class="panel-collapse collapse in">
                                                             <div class="panel-body">
-                                                                <div class="row">
-
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                            </span>
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Package Gross Weight (Kg)</label>
-                                                                                <input name="package_gross_weight" id="package_gross_weight" type="text" class="form-control package_gross_weight" rel="tooltip" title="Input in kg" oninput="<?php echo $onlyNumeric; ?>" >
+                                                                <div id="package-section">
+                                                                    <div class="row package-row">
+                                                                        <div class="col-md-12 text-right">
+                                                                            <button class="add_row btn-sm btn btn-success" type="button">Add new row</button>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating">
+                                                                                    <label class="control-label">Gross Weight (Kg)</label>
+                                                                                    <input name="package_gross_weight" id="package_gross_weight" type="text" class="form-control package_gross_weight" rel="tooltip" title="Input in kg" oninput="<?php echo $onlyNumeric; ?>">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                            </span>
-                                                                            <div class="form-group label-floating package_dimension_label_class">
-                                                                                <label class="control-label">Package Dimensions (length*width*Height)</label>
-                                                                                <input type="text" name="package_dimension" class="form-control package_dimension" id="package_dimension" placeholder="" disabled>
+                                                                        <div class="col-md-3">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating">
+                                                                                    <label class="control-label">Quantity</label>
+                                                                                    <input name="package_quantity" id="package_quantity" type="text" class="form-control package_quantity" rel="tooltip" title="Input in Number" oninput="<?php echo $onlyNumeric; ?>">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                            </span>
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Length in (cm)</label>
-                                                                                <input type="text" name="length" class="form-control length" oninput="<?php echo $onlyNumeric; ?>"  id="length">
+                                                                        <div class="col-md-2">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating">
+                                                                                    <label class="control-label">Length(cm)</label>
+                                                                                    <input type="text" name="length" class="form-control length" oninput="<?php echo $onlyNumeric; ?>" id="length">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                            </span>
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Width in (cm)</label>
-                                                                                <input type="text" name="width" class="form-control width" oninput="<?php echo $onlyNumeric; ?>"  id="width">
+                                                                        <div class="col-md-2">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating">
+                                                                                    <label class="control-label">Width(cm)</label>
+                                                                                    <input type="text" name="width" class="form-control width" oninput="<?php echo $onlyNumeric; ?>" id="width">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                            </span>
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Height in (cm)</label>
-                                                                                <input type="text" name="height" class="form-control height" oninput="<?php echo $onlyNumeric; ?>"  id="height">
+                                                                        <div class="col-md-2">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating">
+                                                                                    <label class="control-label">Height(cm)</label>
+                                                                                    <input type="text" name="height" class="form-control height" oninput="<?php echo $onlyNumeric; ?>" id="height">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                            </span>
-                                                                            <div class="form-group label-floating volumetric_weight_label_class">
-                                                                                <label class="control-label">Volumetric Weight</label>
-                                                                                <input type="text" name="volumetric_weight" id="volumetric_weight" oninput="<?php echo $onlyNumeric; ?>"  class="form-control volumetric_weight" placeholder="" disabled />
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating package_dimension_label_class">
+                                                                                    <label class="control-label">Package Dimensions </label>
+                                                                                    <input type="text" name="package_dimension" class="form-control package_dimension" id="package_dimension" title="(length*width*Height)" disabled>
+                                                                                </div>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group">
+                                                                                <div class="form-group label-floating volumetric_weight_label_class">
+                                                                                    <label class="control-label">Volumetric Weight</label>
+                                                                                    <input type="text" name="volumetric_weight" id="volumetric_weight" oninput="<?php echo $onlyNumeric; ?>" class="form-control volumetric_weight" placeholder="" disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <hr>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -420,7 +476,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Compliance & Certification</label>
-                                                        <input name="compliance_certification" type="text" oninput="<?php echo $onlyNumeric; ?>"  class="form-control compliance_certification" id="compliance_certification" rel="tooltip" title="Input Dependent on part number and country of origin/destination">
+                                                        <input name="compliance_certification" type="text" oninput="<?php echo $onlyNumeric; ?>" class="form-control compliance_certification" id="compliance_certification" rel="tooltip" title="Input Dependent on part number and country of origin/destination">
                                                     </div>
                                                 </div>
                                             </div>
@@ -430,7 +486,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Storage</label>
-                                                        <input name="storage" type="text" class="form-control storage" id="storage" rel="tooltip" title="Input Charges based on actual storage time" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="storage" type="text" class="form-control storage" id="storage" rel="tooltip" title="Input Charges based on actual storage time" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -438,7 +494,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Last Mile Delivery </label>
-                                                        <input name="last_mile_delivery" type="text" class="form-control last_mile_delivery" id="last_mile_delivery" rel="tooltip" title="Input Charges based on actual storage time" oninput="<?php echo $onlyNumeric; ?>" >
+                                                        <input name="last_mile_delivery" type="text" class="form-control last_mile_delivery" id="last_mile_delivery" rel="tooltip" title="Input Charges based on actual storage time" oninput="<?php echo $onlyNumeric; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -462,6 +518,8 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
                                 <input type="hidden" class="handling_value" id="handling_value">
                                 <input type="hidden" class="customs_brokerage_value" id="customs_brokerage_value">
                                 <input type="hidden" class="admin_bank_charges_value" id="admin_bank_charges_value">
+                                <input type="hidden" name="total_package_gross_weight" class="total_package_gross_weight" id="total_package_gross_weight">
+                                <input type="hidden"  name="total_volumetric_weight" class="total_volumetric_weight" id="total_volumetric_weight">
                                 <div class="wizard-footer">
                                     <div class="pull-right">
                                         <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Next' />
@@ -493,7 +551,7 @@ $rates_countries = mysqli_query($connection, $rates_countries_query);
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="estimateModalLabel">Estimate</h5>
+                    <h5 class="modal-title" id="estimateModalLabel">Estimate Modal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -547,20 +605,19 @@ $(document).ready(function() {
             $('#estimateForm').find(':disabled').prop('disabled', true);
                 
                 if (response == 1) {
-                    // swal({
-                    //     text: "PDF generated successfully!",
-                    //     icon: "success",
-                    //     button: "OK",
-                    // }).then(function () {
-                    //     // window.location = "home.php"
-                    // });
+                    swal({
+                        text: "PDF generated successfully!",
+                        icon: "success",
+                        button: "OK",
+                    }).then(function () {
+                        location.reload();
+                    });
 
                     setTimeout(download_function, 500);
 					function download_function() {
 						let btn = document.querySelector('#hidden_download');
 						btn.click();
-
-                        window.location = "home.php"
+				// 		location.reload();
 					}
                 }
                 else {
@@ -569,8 +626,7 @@ $(document).ready(function() {
                         icon: "warning",
                         button: "OK",
                     }).then(function () {
-                        // window.location =
-                        //     "home.php"
+                        location.reload();
                     })
                 }
 					// $(".wizard-container").hide();

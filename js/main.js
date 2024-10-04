@@ -1,6 +1,6 @@
 
 // Define domain name
-var Domain = (window.location.protocol+'//'+window.location.host+"/freight_calculator");
+var Domain = (window.location.protocol+'//'+window.location.host+"/freight_calculator/");
 var DomainName = ("/");
 
 // if ((window.location.protocol+'//'+window.location.host) == "http://vt-inven.venturetronics.com") {
